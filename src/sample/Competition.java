@@ -17,6 +17,7 @@ public class Competition {
     @Column(name = "subseries_round")
     private int subseriesRound;
 
+    //TODO changed relaion to ManytoOne here and in Season, Series and Subseries
     @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "fkseason")
     private Season season;
