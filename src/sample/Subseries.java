@@ -8,6 +8,7 @@ public class Subseries {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idsubseries")
     private int idsubseries;
 
     @Column(name="subseries")
