@@ -9,7 +9,7 @@ public class Competition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idcompetition")
-    private int idcompetition;
+    private int idCompetition;
 
     @Column(name = "series_round")
     private int seriesRound;
@@ -40,12 +40,12 @@ public class Competition {
         this.subseries = subseries;
     }
 
-    public int getIdcompetition() {
-        return idcompetition;
+    public int getIdCompetition() {
+        return idCompetition;
     }
 
-    public void setIdcompetition(int idcompetition) {
-        this.idcompetition = idcompetition;
+    public void setIdCompetition(int idCompetition) {
+        this.idCompetition = idCompetition;
     }
 
     public int getSeriesRound() {
@@ -91,7 +91,7 @@ public class Competition {
     @Override
     public String toString() {
         return "Competition{" +
-                "idcompetition=" + idcompetition +
+                "idcompetition=" + idCompetition +
                 ", seriesRound=" + seriesRound +
                 ", subseriesRound=" + subseriesRound +
                 ", season=" + season +

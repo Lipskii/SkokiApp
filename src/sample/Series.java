@@ -9,7 +9,7 @@ public class Series {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idseries")
-    private int idseries;
+    private int idSeries;
 
     @Column(name = "series")
     private String series;
@@ -21,12 +21,12 @@ public class Series {
         this.series = series;
     }
 
-    public int getIdseries() {
-        return idseries;
+    public int getIdSeries() {
+        return idSeries;
     }
 
-    public void setIdseries(int idseries) {
-        this.idseries = idseries;
+    public void setIdSeries(int idSeries) {
+        this.idSeries = idSeries;
     }
 
     public String getSeries() {
@@ -40,7 +40,7 @@ public class Series {
     @Override
     public String toString() {
         return "Series{" +
-                "idseries=" + idseries +
+                "idseries=" + idSeries +
                 ", series='" + series + '\'' +
                 '}';
     }

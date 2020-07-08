@@ -9,7 +9,7 @@ public class Season {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idseason")
-    private int idseason;
+    private int idSeason;
 
     @Column(name = "season")
     private int season;
@@ -21,18 +21,18 @@ public class Season {
         this.season = season;
     }
 
-    public int getIdseason() {
-        return idseason;
+    public int getIdSeason() {
+        return idSeason;
     }
 
-    public void setIdseason(int idseason) {
-        this.idseason = idseason;
+    public void setIdSeason(int idSeason) {
+        this.idSeason = idSeason;
     }
 
     @Override
     public String toString() {
         return "Season{" +
-                "idseason=" + idseason +
+                "idseason=" + idSeason +
                 ", season=" + season +
                 '}';
     }

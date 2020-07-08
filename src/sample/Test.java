@@ -13,14 +13,16 @@ public class Test {
                 .addAnnotatedClass(Subseries.class)
                 .addAnnotatedClass(Series.class)
                 .addAnnotatedClass(Season.class)
+                .addAnnotatedClass(Country.class)
+                .addAnnotatedClass(Region.class)
                 .buildSessionFactory();
 
         try (factory; Session session = factory.getCurrentSession()) {
             session.beginTransaction();
 
-            List seriesList = session.createQuery("from Series").getResultList();
+            Country country = session.get(Country.class, 166);
 
-            System.out.println(Arrays.toString(seriesList.toArray()));
+            System.out.println(country.getRegions());
 
             session.getTransaction().commit();
 

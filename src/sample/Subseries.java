@@ -9,9 +9,9 @@ public class Subseries {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idsubseries")
-    private int idsubseries;
+    private int idSubseries;
 
-    @Column(name="subseries")
+    @Column(name = "subseries")
     private int subseries;
 
     public Subseries() {
@@ -21,12 +21,12 @@ public class Subseries {
         this.subseries = subseries;
     }
 
-    public int getIdsubseries() {
-        return idsubseries;
+    public int getIdSubseries() {
+        return idSubseries;
     }
 
-    public void setIdsubseries(int idsubseries) {
-        this.idsubseries = idsubseries;
+    public void setIdSubseries(int idSubseries) {
+        this.idSubseries = idSubseries;
     }
 
     public int getSubseries() {
@@ -40,7 +40,7 @@ public class Subseries {
     @Override
     public String toString() {
         return "Subseries{" +
-                "idsubseries=" + idsubseries +
+                "idsubseries=" + idSubseries +
                 ", subseries=" + subseries +
                 '}';
     }
