@@ -1,6 +1,8 @@
 package sample;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "series")
@@ -13,6 +15,9 @@ public class Series {
 
     @Column(name = "series")
     private String series;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "series", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private List<Competition> competitions;
 
     public Series() {
     }
@@ -35,6 +40,15 @@ public class Series {
 
     public void setSeries(String series) {
         this.series = series;
+    }
+
+    public void addCompetition(Competition competition) {
+        if (competitions == null) {
+            competitions = new ArrayList<>();
+        }
+        competitions.add(competition);
+
+        competition.setSeries(this);
     }
 
     @Override

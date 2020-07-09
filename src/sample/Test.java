@@ -15,6 +15,9 @@ public class Test {
                 .addAnnotatedClass(Season.class)
                 .addAnnotatedClass(Country.class)
                 .addAnnotatedClass(Region.class)
+                .addAnnotatedClass(Competition.class)
+                .addAnnotatedClass(City.class)
+                .addAnnotatedClass(Venue.class)
                 .buildSessionFactory();
 
         try (factory; Session session = factory.getCurrentSession()) {

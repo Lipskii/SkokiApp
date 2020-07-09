@@ -1,6 +1,8 @@
 package sample;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "region")
@@ -17,6 +19,10 @@ public class Region {
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "fkcountry")
     private Country country;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "series", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private List<City> cities;
+
 
     public Region() {
     }
@@ -48,6 +54,24 @@ public class Region {
 
     public void setCountry(Country country) {
         this.country = country;
+    }
+
+    public List<City> getCities() {
+        return cities;
+    }
+
+    public void setCities(List<City> cities) {
+        this.cities = cities;
+    }
+
+    public void addCity(City city) {
+        if (cities == null) {
+            cities = new ArrayList<>();
+        }
+
+        city.setRegion(this);
+
+        cities.add(city);
     }
 
     @Override

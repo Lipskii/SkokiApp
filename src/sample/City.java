@@ -1,0 +1,74 @@
+package sample;
+
+
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name = "city")
+public class City {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idcity")
+    private int idCity;
+
+    @Column(name = "city")
+    private String city;
+
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "fkregion")
+    private Region region;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "city", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private List<Venue> venues;
+
+    public City() {
+    }
+
+    public City(String city, Region region) {
+        this.city = city;
+        this.region = region;
+    }
+
+    public int getIdCity() {
+        return idCity;
+    }
+
+    public void setIdCity(int idCity) {
+        this.idCity = idCity;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public Region getRegion() {
+        return region;
+    }
+
+    public void setRegion(Region region) {
+        this.region = region;
+    }
+
+    public List<Venue> getVenues() {
+        return venues;
+    }
+
+    public void setVenues(List<Venue> venues) {
+        this.venues = venues;
+    }
+
+    @Override
+    public String toString() {
+        return "City{" +
+                "idCity=" + idCity +
+                ", city='" + city + '\'' +
+                ", region=" + region +
+                '}';
+    }
+}
