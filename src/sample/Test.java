@@ -22,6 +22,8 @@ public class Test {
                 .addAnnotatedClass(Hill.class)
                 .addAnnotatedClass(TypeOfHill.class)
                 .addAnnotatedClass(HillVersion.class)
+                .addAnnotatedClass(Person.class)
+                .addAnnotatedClass(SkiJumper.class)
                 .buildSessionFactory();
 
         try (factory; Session session = factory.getCurrentSession()) {

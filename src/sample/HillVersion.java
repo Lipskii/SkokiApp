@@ -53,8 +53,7 @@ public class HillVersion {
     public HillVersion() {
     }
 
-    public HillVersion(int idHillVersion, int firstYear, int lastYear, BigDecimal inrunLength, BigDecimal inrunAngle, BigDecimal takeOffLength, BigDecimal takeOffAngle, BigDecimal takeOffHeight, BigDecimal kPoint, BigDecimal hillSize, BigDecimal hillVersionRecord, Hill hill, TypeOfHill typeOfHill) {
-        this.idHillVersion = idHillVersion;
+    public HillVersion(int firstYear, int lastYear, BigDecimal inrunLength, BigDecimal inrunAngle, BigDecimal takeOffLength, BigDecimal takeOffAngle, BigDecimal takeOffHeight, BigDecimal kPoint, BigDecimal hillSize, BigDecimal hillVersionRecord, Hill hill, TypeOfHill typeOfHill) {
         this.firstYear = firstYear;
         this.lastYear = lastYear;
         this.inrunLength = inrunLength;
