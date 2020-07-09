@@ -1,6 +1,8 @@
 package sample;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "venue")
@@ -23,6 +25,9 @@ public class Venue {
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "fkcity")
     private City city;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "venue", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private List<Hill> hills;
 
     public Venue() {
     }
@@ -72,6 +77,23 @@ public class Venue {
 
     public void setCity(City city) {
         this.city = city;
+    }
+
+    public List<Hill> getHills() {
+        return hills;
+    }
+
+    public void setHills(List<Hill> hills) {
+        this.hills = hills;
+    }
+
+    public void addHill(Hill hill) {
+        if (hills == null) {
+            hills = new ArrayList<>();
+        }
+        hill.setVenue(this);
+
+        hills.add(hill);
     }
 
     @Override

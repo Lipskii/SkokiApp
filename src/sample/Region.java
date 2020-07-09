@@ -20,7 +20,7 @@ public class Region {
     @JoinColumn(name = "fkcountry")
     private Country country;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "series", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "region", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<City> cities;
 
 

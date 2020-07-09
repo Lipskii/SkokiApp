@@ -2,6 +2,7 @@ package sample;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -61,6 +62,16 @@ public class City {
 
     public void setVenues(List<Venue> venues) {
         this.venues = venues;
+    }
+
+    public void addVenue(Venue venue) {
+        if (venues == null) {
+            venues = new ArrayList<>();
+        }
+
+        venue.setCity(this);
+
+        venues.add(venue);
     }
 
     @Override
