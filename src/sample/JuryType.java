@@ -15,7 +15,7 @@ public class JuryType {
     @Column(name = "jury_type")
     private String juryType;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "jury_type", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "juryType", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Jury> juries;
 
     public JuryType() {
