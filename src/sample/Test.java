@@ -23,6 +23,8 @@ public class Test {
                 .addAnnotatedClass(Disqualification.class)
                 .addAnnotatedClass(EventCom.class)
                 .addAnnotatedClass(JuryType.class)
+                .addAnnotatedClass(Jury.class)
+                .addAnnotatedClass(Result.class)
                 .buildSessionFactory();
 
         try (factory; Session session = factory.getCurrentSession()) {
