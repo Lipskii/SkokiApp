@@ -1,4 +1,5 @@
-package sample;
+package BuchalkaCourse;
+
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,10 +10,10 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Skoki Database App");
-        primaryStage.setScene(new Scene(root));
+        primaryStage.setTitle("Course");
+        primaryStage.setScene(new Scene(root, 900, 500));
         primaryStage.show();
     }
 
@@ -21,3 +22,4 @@ public class Main extends Application {
         launch(args);
     }
 }
+
