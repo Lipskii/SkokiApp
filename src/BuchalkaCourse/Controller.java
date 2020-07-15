@@ -10,9 +10,10 @@ import javafx.scene.control.TextArea;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.ToDoubleBiFunction;
+
 
 public class Controller {
 
@@ -51,6 +52,11 @@ public class Controller {
                 if (t1 != null) {
                     TodoItem item = todoListView.getSelectionModel().getSelectedItem();
                     itemDetailsTextArea.setText(item.getDetails());
+
+                    //formatowanie daty
+                    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM d, yyyy");
+                    deadlineLabel.setText(dateTimeFormatter.format(item.getDeadline()));
+
                 }
             }
         });
