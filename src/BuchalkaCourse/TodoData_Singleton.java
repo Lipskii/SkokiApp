@@ -40,10 +40,9 @@ public class TodoData_Singleton {
     public void loadTodoItems() throws IOException {
         todoItems = FXCollections.observableArrayList();
         Path path = Paths.get(filename);
-        BufferedReader br = Files.newBufferedReader(path);
 
-        String input;
-        try {
+        try (BufferedReader br = Files.newBufferedReader(path)) {
+            String input;
             while ((input = br.readLine()) != null) {
                 String[] itemPieces = input.split("\t");
 
@@ -55,30 +54,19 @@ public class TodoData_Singleton {
                 TodoItem todoItem = new TodoItem(shortDescription, details, date);
                 todoItems.add(todoItem);
             }
-        } finally {
-            if (br != null) {
-                br.close();
-            }
         }
     }
 
     public void storeTodoItems() throws IOException {
         Path path = Paths.get(filename);
-        BufferedWriter bw = Files.newBufferedWriter(path);
-        try {
-            Iterator<TodoItem> iter = todoItems.iterator();
-            while (iter.hasNext()) {
-                TodoItem item = iter.next();
+        try (BufferedWriter bw = Files.newBufferedWriter(path)) {
+            for (TodoItem item : todoItems) {
                 bw.write(String.format("%s\t%s\t%s",
                         item.getShortDescription(),
                         item.getDetails(),
                         item.getDeadline().format(formatter)));
 
                 bw.newLine();
-            }
-        } finally {
-            if (bw != null) {
-                bw.close();
             }
         }
     }
