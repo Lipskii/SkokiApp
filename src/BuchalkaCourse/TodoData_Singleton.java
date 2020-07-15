@@ -33,9 +33,9 @@ public class TodoData_Singleton {
         return todoItems;
     }
 
-    public void setTodoItems(List<TodoItem> todoItems) {
-        this.todoItems = todoItems;
-    }
+//    public void setTodoItems(List<TodoItem> todoItems) {
+//        this.todoItems = todoItems;
+//    }
 
     public void loadTodoItems() throws IOException {
         todoItems = FXCollections.observableArrayList();
@@ -69,7 +69,7 @@ public class TodoData_Singleton {
             Iterator<TodoItem> iter = todoItems.iterator();
             while (iter.hasNext()) {
                 TodoItem item = iter.next();
-                bw.write(String.format("%s\t%S\t%s",
+                bw.write(String.format("%s\t%s\t%s",
                         item.getShortDescription(),
                         item.getDetails(),
                         item.getDeadline().format(formatter)));

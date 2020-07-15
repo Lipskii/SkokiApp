@@ -7,6 +7,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class Main extends Application {
 
     @Override
@@ -20,6 +22,25 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    //zapisywanie daty po zamknięciu
+    @Override
+    public void stop() throws Exception {
+        try {
+            TodoData_Singleton.getInstance().storeTodoItems();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Override
+    public void init() throws Exception {
+        try {
+            TodoData_Singleton.getInstance().loadTodoItems();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
 
