@@ -3,3 +3,7 @@ Doctor's appointment	SEE DOCTOR SMITH AT SOME STREE	25-05-2016
 Finish design proposal for a client	I PROMISED MIKE I'D EMAIL HIM WITH DETAILS	15-07-2020
 Pickup Doug at the train station	DOUG'S ARRIVING ON MARCH 23	25-04-2019
 Pick up dry cleaning	CLOTHES SHOULD BE READY BY WEDNESDAY	06-07-2017
+ds	dfsfdfs	02-07-2020
+Nowe wydarzenie	Będzie się działo!	01-08-2020
+Inne nowe	Jeszcze nowsze i lepsze bo się zaznacza!	15-07-2021
+MyShortTest	Test shorty	21-08-2020

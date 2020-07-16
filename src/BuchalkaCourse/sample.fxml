@@ -13,13 +13,14 @@
 <?import javafx.scene.control.SeparatorMenuItem?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
+            fx:id="mainBorderPane"
             fx:controller="BuchalkaCourse.Controller"
             prefHeight="400.0" prefWidth="600.0">
     <top>
         <MenuBar>
             <Menu text="File">
                 <items>
-                    <MenuItem text="New..."/>
+                    <MenuItem text="New..." onAction="#showNewItemDialog"/>
                     <SeparatorMenuItem/>
                     <MenuItem text="Exit"/>
                 </items>
@@ -33,7 +34,7 @@
     </left>
     <center>
         <VBox>
-            <TextArea fx:id="itemDetailsTextArea" VBox.vgrow="ALWAYS"/>
+            <TextArea fx:id="itemDetailsTextArea" VBox.vgrow="ALWAYS" wrapText="true"/>
             <HBox>
                 <Label text="Due: " style="-fx-background-color: white">
                     <font>

@@ -1,6 +1,7 @@
 package BuchalkaCourse;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -17,7 +18,7 @@ public class TodoData_Singleton {
     private static TodoData_Singleton instance = new TodoData_Singleton();
     private static String filename = "TodoListItems.txt";
 
-    private List<TodoItem> todoItems;
+    private ObservableList<TodoItem> todoItems;
     private DateTimeFormatter formatter;
 
     public static TodoData_Singleton getInstance() {
@@ -28,7 +29,8 @@ public class TodoData_Singleton {
         this.formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     }
 
-    public List<TodoItem> getTodoItems() {
+    //Używamy Observable zamiast tradycyjnej List, z uwagi na performance
+    public ObservableList<TodoItem> getTodoItems() {
         return todoItems;
     }
 
@@ -68,5 +70,9 @@ public class TodoData_Singleton {
                 bw.newLine();
             }
         }
+    }
+
+    public void addTodoItem(TodoItem todoItem) {
+        todoItems.add(todoItem);
     }
 }
