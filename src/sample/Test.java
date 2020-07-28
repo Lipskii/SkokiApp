@@ -36,6 +36,8 @@ public class Test {
 
             session.getTransaction().commit();
 
+            DataSource dataSource = new DataSource();
+            dataSource.regionList();
 
         }
     }
