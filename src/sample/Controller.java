@@ -8,20 +8,18 @@ import javafx.scene.control.Menu;
 
 public class Controller {
 
+    private DataSource dataSource;
     @FXML
-    private Menu fileButton;
+    private Button resultsButton;
     @FXML
-    private Label label;
+    private Button allTimeRankingButton;
     @FXML
-    Button button;
+    private Label headingLabel;
 
 
-    @FXML
-    private void setFileButton(ActionEvent event){
-        label.setText("SIEMA!");
+    public void initialize() {
+        dataSource = new DataSource();
     }
-    @FXML
-    private void button(ActionEvent event){
-        label.setText("Ssad!");
-    }
+
+
 }

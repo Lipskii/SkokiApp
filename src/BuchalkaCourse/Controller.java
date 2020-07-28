@@ -93,8 +93,11 @@ public class Controller {
                             setText(null);
                         } else {
                             setText(item.getShortDescription());
-                            if (item.getDeadline().equals(LocalDate.now())) {
+                            //jeśli data już minęła lub jest dzisiaj
+                            if (item.getDeadline().isBefore(LocalDate.now().plusDays(1))) {
                                 setTextFill(Color.RED);
+                            } else if (item.getDeadline().equals(LocalDate.now().plusDays(1))) {
+                                setTextFill(Color.BROWN);
                             }
                         }
                     }

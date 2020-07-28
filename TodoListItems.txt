@@ -8,3 +8,4 @@ Nowe wydarzenie	Będzie się działo!	01-08-2020
 Inne nowe	Jeszcze nowsze i lepsze bo się zaznacza!	15-07-2021
 MyShortTest	Test shorty	21-08-2020
 Today	dzisiaj	16-07-2020
+Jutrzejsze wydarzenie	jutroooooooooo	17-07-2020
