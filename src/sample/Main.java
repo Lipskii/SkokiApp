@@ -18,6 +18,7 @@ public class Main extends Application {
         primaryStage.setTitle("Skoki Database App");
         primaryStage.setMaximized(true);
         primaryStage.setScene(new Scene(root));
+
         primaryStage.show();
         root.requestFocus();
     }
