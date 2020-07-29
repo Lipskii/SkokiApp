@@ -17,7 +17,8 @@ public class DataSource {
 
     SessionFactory factory;
     Session session;
-    ObservableList<Region> observableList;
+    ObservableList<Region> regionObservableList;
+    ObservableList<Country> countryObservableList;
 
     public DataSource() {
         factory = new Configuration().configure()
@@ -43,15 +44,25 @@ public class DataSource {
         session = factory.getCurrentSession();
     }
 
-    public ObservableList<Region> regionList() {
-        observableList = FXCollections.observableArrayList();
+    public ObservableList<Region> getRegionList() {
+        regionObservableList = FXCollections.observableArrayList();
         session.beginTransaction();
         List<Region> regions = session.createQuery("from Region").getResultList();
         session.getTransaction().commit();
         for (Region region : regions) {
-            observableList.add(region);
-            System.out.println(region);
+            regionObservableList.add(region);
         }
-        return observableList;
+        return regionObservableList;
+    }
+
+    public ObservableList<Country> getCountryList() {
+        countryObservableList = FXCollections.observableArrayList();
+        session.beginTransaction();
+        List<Country> countries = session.createQuery("from Country").getResultList();
+        session.getTransaction().commit();
+        for (Country country : countries) {
+            countryObservableList.add(country);
+        }
+        return countryObservableList;
     }
 }

@@ -4,6 +4,9 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Test {
     public static void main(String[] args) {
         SessionFactory factory = new Configuration().configure()
@@ -32,12 +35,16 @@ public class Test {
 
             Country country = session.get(Country.class, 166);
 
-            System.out.println(country.getRegions());
+            //  System.out.println(country.getRegions());
 
+            List<Country> countries = session.createQuery("from Country").getResultList();
+            //    System.out.println(Arrays.toString(countries.toArray()));
             session.getTransaction().commit();
 
             DataSource dataSource = new DataSource();
-            dataSource.regionList();
+            //   dataSource.getRegionList();
+            dataSource.getCountryList();
+
 
         }
     }

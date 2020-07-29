@@ -2,14 +2,17 @@ package sample;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+
+import java.io.IOException;
 
 public class Controller {
 
     private DataSource dataSource;
 
-    //Buttons
     @FXML
     private Button addResultButton;
     @FXML
@@ -23,9 +26,13 @@ public class Controller {
     @FXML
     private Button resultsButton;
     @FXML
+    private Button selectResultsTypeButton;
+    @FXML
     private Button skiJumpersButton;
     @FXML
     private ChoiceBox selectResultsTypeChoiceBox;
+    @FXML
+    private GridPane mainGridPane;
     @FXML
     private ListView<Region> listView;
     @FXML
@@ -63,6 +70,36 @@ public class Controller {
         selectResultsTypeChoiceBox.setItems(FXCollections.observableArrayList(
                 "POS|NAME|COUNTRY|NOTE", "dwa", "trzy"));
         selectResultsTypeChoiceBox.getSelectionModel().selectFirst();
+    }
+
+    @FXML
+    public void handleSelectResultsTypeButton() {
+        if (selectResultsTypeChoiceBox.getValue() == "POS|NAME|COUNTRY|NOTE") {
+            showPosNameCountryNoteDialogPane();
+        } else {
+        }
+    }
+
+    @FXML
+    public void showPosNameCountryNoteDialogPane() {
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.initOwner(mainGridPane.getScene().getWindow());
+        dialog.setTitle("Add New Todo Item");
+        dialog.setHeaderText("Use this dialog to create a new todo item");
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("PosNameCountryNoteDialogPane.fxml"));
+        try {
+            dialog.getDialogPane().setContent(fxmlLoader.load());
+        } catch (IOException e) {
+            System.out.println("Couldn't load the dialog");
+            e.printStackTrace();
+            return;
+        }
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+
+        dialog.showAndWait();
+
     }
 
 
