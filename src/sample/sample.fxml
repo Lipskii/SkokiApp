@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,7 +11,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1078.0"
           prefWidth="1883.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
@@ -82,8 +82,8 @@
         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
                     prefHeight="94.0" prefWidth="1249.0" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
         <Button fx:id="cancelButton" alignment="BOTTOM_RIGHT" cancelButton="true" contentDisplay="BOTTOM"
-                mnemonicParsing="false" onAction="#cancelButton" text="Cancel" visible="false" wrapText="true"
-                GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
+                mnemonicParsing="false" onAction="#cancelButton" text="Cancel" wrapText="true" GridPane.columnIndex="2"
+                GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
             <font>
                 <Font size="24.0"/>
             </font>
@@ -91,10 +91,24 @@
                 <Insets bottom="240.0"/>
             </GridPane.margin>
         </Button>
-        <ListView fx:id="listView" prefHeight="768.0" prefWidth="1246.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+        <ListView fx:id="listView" prefHeight="768.0" prefWidth="1246.0" visible="false" GridPane.columnIndex="1"
+                  GridPane.rowIndex="4">
             <GridPane.margin>
                 <Insets bottom="230.0"/>
             </GridPane.margin>
         </ListView>
+        <VBox fx:id="addResultsTypeVBox" alignment="TOP_CENTER" prefHeight="571.0" prefWidth="1246.0"
+              GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP">
+            <children>
+                <ChoiceBox fx:id="selectResultsTypeChoiceBox" prefHeight="50.0" prefWidth="406.0"/>
+            </children>
+        </VBox>
+        <Label fx:id="lowerLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="67.0" prefWidth="442.0"
+               text="Choose a type" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3"
+               GridPane.valignment="CENTER">
+            <font>
+                <Font size="24.0"/>
+            </font>
+        </Label>
     </children>
 </GridPane>

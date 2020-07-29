@@ -1,19 +1,9 @@
 package sample;
 
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Menu;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class Controller {
 
@@ -34,16 +24,19 @@ public class Controller {
     private Button resultsButton;
     @FXML
     private Button skiJumpersButton;
-    //Listy
+    @FXML
+    private ChoiceBox selectResultsTypeChoiceBox;
     @FXML
     private ListView<Region> listView;
     @FXML
     private VBox menuBox;
-
-
+    @FXML
+    private VBox addResultsTypeVBox;
     //Labels
     @FXML
     private Label headingLabel;
+    @FXML
+    private Label lowerLabel;
 
 
     public void initialize() {
@@ -55,9 +48,7 @@ public class Controller {
 //            }
 //        });
 
-
-        //    ObservableList<Region> regions = dataSource.regionList();
-        listView.getItems().addAll(dataSource.regionList());
+        // listView.getItems().addAll(dataSource.regionList());
 
     }
 
@@ -66,6 +57,12 @@ public class Controller {
         menuBox.setVisible(false);
         cancelButton.setVisible(true);
         headingLabel.setText("Add result");
+        lowerLabel.setText("Choose a type of results input");
+        lowerLabel.setVisible(true);
+        addResultsTypeVBox.setVisible(true);
+        selectResultsTypeChoiceBox.setItems(FXCollections.observableArrayList(
+                "POS|NAME|COUNTRY|NOTE", "dwa", "trzy"));
+        selectResultsTypeChoiceBox.getSelectionModel().selectFirst();
     }
 
 
@@ -74,6 +71,8 @@ public class Controller {
         menuBox.setVisible(true);
         cancelButton.setVisible(false);
         headingLabel.setText("Menu");
+        lowerLabel.setVisible(false);
+        addResultsTypeVBox.setVisible(false);
     }
 
 //    @FXML
