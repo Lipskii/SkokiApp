@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.collections.ObservableList;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +21,7 @@ public class Country {
     @Column(name = "country_code")
     private String countryCode;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "country", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "country", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Region> regions;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "country", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
@@ -61,7 +63,7 @@ public class Country {
         return regions;
     }
 
-    public void setRegions(List<Region> regions) {
+    public void setRegions(ObservableList<Region> regions) {
         this.regions = regions;
     }
 

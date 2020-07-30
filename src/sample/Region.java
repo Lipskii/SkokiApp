@@ -76,10 +76,6 @@ public class Region {
 
     @Override
     public String toString() {
-        return "Region{" +
-                "idRegion=" + idRegion +
-                ", region='" + region + '\'' +
-                ", country=" + country +
-                '}';
+        return region;
     }
 }

@@ -16,7 +16,7 @@ import java.util.ListIterator;
 public class DataSource {
 
     SessionFactory factory;
-    Session session;
+    //Session session;
     ObservableList<Region> regionObservableList;
     ObservableList<Country> countryObservableList;
 
@@ -41,10 +41,11 @@ public class DataSource {
                 .addAnnotatedClass(Jury.class)
                 .addAnnotatedClass(Result.class)
                 .buildSessionFactory();
-        session = factory.getCurrentSession();
+
     }
 
     public ObservableList<Region> getRegionList() {
+        Session session = factory.getCurrentSession();
         regionObservableList = FXCollections.observableArrayList();
         session.beginTransaction();
         List<Region> regions = session.createQuery("from Region").getResultList();
@@ -56,6 +57,7 @@ public class DataSource {
     }
 
     public ObservableList<Country> getCountryList() {
+        Session session = factory.getCurrentSession();
         countryObservableList = FXCollections.observableArrayList();
         session.beginTransaction();
         List<Country> countries = session.createQuery("from Country").getResultList();
@@ -64,5 +66,11 @@ public class DataSource {
             countryObservableList.add(country);
         }
         return countryObservableList;
+    }
+
+    public ObservableList<Region> getRegionsByCountry(Country country) {
+        List<Region> regions = country.getRegions();
+        ObservableList<Region> regionObservableList = FXCollections.observableList(regions);
+        return regionObservableList;
     }
 }

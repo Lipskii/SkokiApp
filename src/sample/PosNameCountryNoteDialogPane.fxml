@@ -16,7 +16,7 @@
             <Label prefHeight="18.0" prefWidth="54.0" text="Country:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
             <Label text="Venue" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
             <ComboBox fx:id="countryComboBox" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
-            <ComboBox prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+            <ComboBox fx:id="venueComboBox" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
             <columnConstraints>
                 <ColumnConstraints/>
                 <ColumnConstraints/>
