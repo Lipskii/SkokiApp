@@ -47,9 +47,7 @@ public class DataSource {
         session.beginTransaction();
         List<Region> regions = session.createQuery("from Region").getResultList();
         session.getTransaction().commit();
-        for (Region region : regions) {
-            regionObservableList.add(region);
-        }
+        regionObservableList.addAll(regions);
         return regionObservableList;
     }
 
@@ -59,9 +57,7 @@ public class DataSource {
         session.beginTransaction();
         List<Country> countries = session.createQuery("from Country").getResultList();
         session.getTransaction().commit();
-        for (Country country : countries) {
-            countryObservableList.add(country);
-        }
+        countryObservableList.addAll(countries);
         return countryObservableList;
     }
 
