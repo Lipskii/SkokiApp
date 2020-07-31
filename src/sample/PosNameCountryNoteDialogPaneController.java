@@ -96,6 +96,9 @@ public class PosNameCountryNoteDialogPaneController {
             }
         });
 
+        //TODO REPAIR comboBoxed updates
+        
+
         seriesComboBox.setItems(dataSource.getSeriesList());
         subseriesComboBox.setItems(dataSource.getSubSeriesList());
 
