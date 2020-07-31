@@ -43,7 +43,8 @@ public class Test {
 
             DataSource dataSource = new DataSource();
             //   dataSource.getRegionList();
-            dataSource.getCountryList();
+            List<Country> countries1 = dataSource.getCountryList();
+            dataSource.getCityByCountry(countries1.get(176));
 
 
         }

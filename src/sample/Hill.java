@@ -32,7 +32,7 @@ public class Hill {
     @JoinColumn(name = "fkvenue")
     private Venue venue;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "hill", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "hill", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<HillVersion> hillVersions;
 
     public Hill() {
@@ -119,14 +119,6 @@ public class Hill {
 //    }
     @Override
     public String toString() {
-        return "Hill{" +
-                "idHill=" + idHill +
-                ", hillName='" + hillName + '\'' +
-                ", yearOfConstruction=" + yearOfConstruction +
-                ", lastReconstruction=" + lastReconstruction +
-                ", reconstructions='" + reconstructions + '\'' +
-                ", plasticMatting=" + plasticMatting +
-                ", venue=" + venue +
-                '}';
+        return hillName;
     }
 }

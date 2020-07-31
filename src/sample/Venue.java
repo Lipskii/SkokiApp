@@ -26,7 +26,7 @@ public class Venue {
     @JoinColumn(name = "fkcity")
     private City city;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "venue", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "venue", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Hill> hills;
 
     public Venue() {
@@ -98,12 +98,6 @@ public class Venue {
 
     @Override
     public String toString() {
-        return "Venue{" +
-                "idVenue=" + idVenue +
-                ", venue='" + venue + '\'' +
-                ", yearOfOpening=" + yearOfOpening +
-                ", capacity=" + capacity +
-                ", city=" + city +
-                '}';
+        return venue;
     }
 }

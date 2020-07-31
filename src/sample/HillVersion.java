@@ -174,20 +174,9 @@ public class HillVersion {
 
     @Override
     public String toString() {
-        return "HillVersion{" +
-                "idHillVersion=" + idHillVersion +
-                ", firstYear=" + firstYear +
+        return "FirstYear=" + firstYear +
                 ", lastYear=" + lastYear +
-                ", inrunLength=" + inrunLength +
-                ", inrunAngle=" + inrunAngle +
-                ", takeOffLength=" + takeOffLength +
-                ", takeOffAngle=" + takeOffAngle +
-                ", takeOffHeight=" + takeOffHeight +
                 ", kPoint=" + kPoint +
-                ", hillSize=" + hillSize +
-                ", hillVersionRecord=" + hillVersionRecord +
-                ", hill=" + hill +
-                ", typeOfHill=" + typeOfHill +
-                '}';
+                ", hillSize=" + hillSize;
     }
 }

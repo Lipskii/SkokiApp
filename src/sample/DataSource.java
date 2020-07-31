@@ -8,10 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 public class DataSource {
 
@@ -72,5 +69,35 @@ public class DataSource {
         List<Region> regions = country.getRegions();
         ObservableList<Region> regionObservableList = FXCollections.observableList(regions);
         return regionObservableList;
+    }
+
+    public ObservableList<City> getCityByCountry(Country country) {
+        List<Region> regions = getRegionsByCountry(country);
+        List<City> cityList = new ArrayList<>();
+
+        for (Region region : regions) {
+            cityList.addAll(region.getCities());
+        }
+
+        ObservableList<City> cities = FXCollections.observableArrayList(cityList);
+        return cities;
+    }
+
+    public ObservableList<Venue> getVenueByCity(City city) {
+        List<Venue> venues = city.getVenues();
+        ObservableList<Venue> venueObservableList = FXCollections.observableArrayList(venues);
+        return venueObservableList;
+    }
+
+    public ObservableList<Hill> getHillByVenue(Venue venue) {
+        List<Hill> hills = venue.getHills();
+        ObservableList<Hill> hillObservableList = FXCollections.observableArrayList(hills);
+        return hillObservableList;
+    }
+
+    public ObservableList<HillVersion> getHillVersionByHill(Hill hill) {
+        List<HillVersion> hillVersions = hill.getHillVersions();
+        ObservableList<HillVersion> hillVersionObservableList = FXCollections.observableArrayList(hillVersions);
+        return hillVersionObservableList;
     }
 }
