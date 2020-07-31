@@ -16,7 +16,7 @@ public class Series {
     @Column(name = "series")
     private String series;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "series", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "series", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Competition> competitions;
 
     public Series() {
@@ -53,9 +53,6 @@ public class Series {
 
     @Override
     public String toString() {
-        return "Series{" +
-                "idseries=" + idSeries +
-                ", series='" + series + '\'' +
-                '}';
+        return series;
     }
 }

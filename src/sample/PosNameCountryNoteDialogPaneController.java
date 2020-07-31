@@ -7,6 +7,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.time.LocalDate;
+
 
 public class PosNameCountryNoteDialogPaneController {
 
@@ -19,11 +21,44 @@ public class PosNameCountryNoteDialogPaneController {
     @FXML
     ComboBox hillVersionComboBox;
     @FXML
+    ComboBox seriesComboBox;
+    @FXML
+    ComboBox subseriesComboBox;
+    @FXML
     ComboBox venueComboBox;
+    @FXML
+    DatePicker datePicker;  //SEASON będzie wyliczany na podstawie daty
+    @FXML
+    TextField seriesRoundTextField;
+    @FXML
+    TextField subSeriesRoundTextField;
 
 
     public void initialize() {
         DataSource dataSource = new DataSource();
+
+        //set current date as default; more of a tip for a user
+        datePicker.setValue(LocalDate.now());
+
+        //To prevent user from typing anything else than numbers
+        seriesRoundTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    seriesRoundTextField.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
+        subSeriesRoundTextField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    subSeriesRoundTextField.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
         countryComboBox.setItems(FXCollections.observableArrayList(dataSource.getCountryList())); //TODO add listener to update venueComboBox
         countryComboBox.valueProperty().addListener(new ChangeListener() {
             @Override
@@ -60,6 +95,10 @@ public class PosNameCountryNoteDialogPaneController {
                 hillVersionComboBox.setItems(hillVersions);
             }
         });
+
+        seriesComboBox.setItems(dataSource.getSeriesList());
+        subseriesComboBox.setItems(dataSource.getSubSeriesList());
+
     }
 }
 //.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)

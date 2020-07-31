@@ -100,4 +100,28 @@ public class DataSource {
         ObservableList<HillVersion> hillVersionObservableList = FXCollections.observableArrayList(hillVersions);
         return hillVersionObservableList;
     }
+
+    public ObservableList getSeriesList() {
+        Session session = factory.getCurrentSession();
+        ObservableList<Series> series = FXCollections.observableArrayList();
+        session.beginTransaction();
+        List<Series> seriesList = session.createQuery("from Series").getResultList();
+        session.getTransaction().commit();
+        for (Series series1 : seriesList) {
+            series.add(series1);
+        }
+        return series;
+    }
+
+    public ObservableList getSubSeriesList() {
+        Session session = factory.getCurrentSession();
+        ObservableList<Subseries> subseries = FXCollections.observableArrayList();
+        session.beginTransaction();
+        List<Subseries> subSeriesList = session.createQuery("from Subseries").getResultList();
+        session.getTransaction().commit();
+        for (Subseries subSeries1 : subSeriesList) {
+            subseries.add(subSeries1);
+        }
+        return subseries;
+    }
 }

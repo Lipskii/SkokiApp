@@ -14,15 +14,15 @@ public class Subseries {
     private int idSubseries;
 
     @Column(name = "subseries")
-    private int subseries;
+    private String subseries;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "subseries", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "subseries", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Competition> competitions;
 
     public Subseries() {
     }
 
-    public Subseries(int subseries) {
+    public Subseries(String subseries) {
         this.subseries = subseries;
     }
 
@@ -34,11 +34,11 @@ public class Subseries {
         this.idSubseries = idSubseries;
     }
 
-    public int getSubseries() {
+    public String getSubseries() {
         return subseries;
     }
 
-    public void setSubseries(int subseries) {
+    public void setSubseries(String subseries) {
         this.subseries = subseries;
     }
 
@@ -53,9 +53,6 @@ public class Subseries {
 
     @Override
     public String toString() {
-        return "Subseries{" +
-                "idsubseries=" + idSubseries +
-                ", subseries=" + subseries +
-                '}';
+        return subseries;
     }
 }

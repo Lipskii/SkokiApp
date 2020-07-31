@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.DialogPane?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
@@ -23,6 +25,18 @@
             <ComboBox fx:id="hillComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
             <Label text="Hill Version" GridPane.rowIndex="5"/>
             <ComboBox fx:id="hillVersionComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+            <Label text="Date" GridPane.rowIndex="6"/>
+            <DatePicker fx:id="datePicker" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+            <Label text="Series" GridPane.rowIndex="7"/>
+            <ComboBox fx:id="seriesComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+            <Label text="Subseries" GridPane.rowIndex="9"/>
+            <ComboBox fx:id="subseriesComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="9"/>
+            <Label text="Series Round" GridPane.rowIndex="8"/>
+            <TextField fx:id="seriesRoundTextField" promptText="Type here a number" GridPane.columnIndex="1"
+                       GridPane.rowIndex="8"/>
+            <Label text="Subseries round" GridPane.rowIndex="10"/>
+            <TextField fx:id="subSeriesRoundTextField" promptText="Type a number" GridPane.columnIndex="1"
+                       GridPane.rowIndex="10"/>
             <columnConstraints>
                 <ColumnConstraints/>
                 <ColumnConstraints/>
@@ -32,6 +46,11 @@
                 <RowConstraints/>
                 <RowConstraints/>
                 <RowConstraints/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0"/>
                 <RowConstraints minHeight="10.0" prefHeight="30.0"/>
                 <RowConstraints minHeight="10.0" prefHeight="30.0"/>
                 <RowConstraints minHeight="10.0" prefHeight="30.0"/>
