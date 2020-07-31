@@ -107,9 +107,7 @@ public class DataSource {
         session.beginTransaction();
         List<Series> seriesList = session.createQuery("from Series").getResultList();
         session.getTransaction().commit();
-        for (Series series1 : seriesList) {
-            series.add(series1);
-        }
+        series.addAll(seriesList);
         return series;
     }
 
@@ -119,9 +117,7 @@ public class DataSource {
         session.beginTransaction();
         List<Subseries> subSeriesList = session.createQuery("from Subseries").getResultList();
         session.getTransaction().commit();
-        for (Subseries subSeries1 : subSeriesList) {
-            subseries.add(subSeries1);
-        }
+        subseries.addAll(subSeriesList);
         return subseries;
     }
 }

@@ -13,19 +13,19 @@ import java.time.LocalDate;
 public class PosNameCountryNoteDialogPaneController {
 
     @FXML
-    ComboBox countryComboBox;
+    ComboBox<Country> countryComboBox;
     @FXML
-    ComboBox cityComboBox;
+    ComboBox<City> cityComboBox;
     @FXML
-    ComboBox hillComboBox;
+    ComboBox<Hill> hillComboBox;
     @FXML
-    ComboBox hillVersionComboBox;
+    ComboBox<HillVersion> hillVersionComboBox;
     @FXML
     ComboBox seriesComboBox;
     @FXML
     ComboBox subseriesComboBox;
     @FXML
-    ComboBox venueComboBox;
+    ComboBox<Venue> venueComboBox;
     @FXML
     DatePicker datePicker;  //SEASON będzie wyliczany na podstawie daty
     @FXML
@@ -63,7 +63,7 @@ public class PosNameCountryNoteDialogPaneController {
         countryComboBox.valueProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observableValue, Object o, Object t1) {
-                Country country = (Country) countryComboBox.getValue();
+                Country country = countryComboBox.getValue();
                 ObservableList<City> cities = dataSource.getCityByCountry(country);
                 cityComboBox.setItems(cities);
             }
@@ -72,7 +72,7 @@ public class PosNameCountryNoteDialogPaneController {
         cityComboBox.valueProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observableValue, Object o, Object t1) {
-                City city = (City) cityComboBox.getValue();
+                City city = cityComboBox.getValue();
                 ObservableList<Venue> venues = dataSource.getVenueByCity(city);
                 venueComboBox.setItems(venues);
             }
@@ -81,7 +81,7 @@ public class PosNameCountryNoteDialogPaneController {
         hillComboBox.valueProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observableValue, Object o, Object t1) {
-                Venue venue = (Venue) venueComboBox.getValue();
+                Venue venue = venueComboBox.getValue();
                 ObservableList<Hill> hills = dataSource.getHillByVenue(venue);
                 hillComboBox.setItems(hills);
             }
@@ -90,7 +90,7 @@ public class PosNameCountryNoteDialogPaneController {
         hillVersionComboBox.valueProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observableValue, Object o, Object t1) {
-                Hill hill = (Hill) hillComboBox.getValue();
+                Hill hill = hillComboBox.getValue();
                 ObservableList<HillVersion> hillVersions = dataSource.getHillVersionByHill(hill);
                 hillVersionComboBox.setItems(hillVersions);
             }
