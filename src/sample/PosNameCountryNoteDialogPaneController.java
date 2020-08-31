@@ -6,12 +6,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import java.io.File;
 import java.time.LocalDate;
 
 
 public class PosNameCountryNoteDialogPaneController {
 
+    @FXML
+    Button fileChooserButton;
     @FXML
     ComboBox<Country> countryComboBox;
     @FXML
@@ -33,6 +38,7 @@ public class PosNameCountryNoteDialogPaneController {
     @FXML
     TextField subSeriesRoundTextField;
 
+    final FileChooser fileChooser = new FileChooser();
 
     public void initialize() {
         DataSource dataSource = new DataSource();
@@ -97,11 +103,19 @@ public class PosNameCountryNoteDialogPaneController {
         });
 
         //TODO REPAIR comboBoxed updates
-        
+
 
         seriesComboBox.setItems(dataSource.getSeriesList());
         subseriesComboBox.setItems(dataSource.getSubSeriesList());
 
+    }
+
+    @FXML
+    public void handleOpenFileChooserButton() {
+        //File chooser to add results fire
+        //TODO add filter to choose only .txt
+        File file = fileChooser.showOpenDialog(new Stage());
+        System.out.println(file.getName());
     }
 }
 //.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
