@@ -16,6 +16,8 @@ public class Controller {
     @FXML
     private Button addResultButton;
     @FXML
+    private Button addVenueButton;
+    @FXML
     private Button allTimeRankingButton;
     @FXML
     private Button cancelButton;
@@ -84,8 +86,8 @@ public class Controller {
     public void showPosNameCountryNoteDialogPane() {
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.initOwner(mainGridPane.getScene().getWindow());
-        dialog.setTitle("Add New Todo Item");
-        dialog.setHeaderText("Use this dialog to create a new todo item");
+        dialog.setTitle("Add results");
+        dialog.setHeaderText("Select");
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("PosNameCountryNoteDialogPane.fxml"));
         try {
@@ -100,6 +102,28 @@ public class Controller {
 
         dialog.showAndWait();
 
+    }
+
+    @FXML
+    public void handleAddVenueButton() {
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.initOwner(mainGridPane.getScene().getWindow());
+        dialog.setTitle("Add venue");
+        dialog.setHeaderText("");
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("AddVenue.fxml"));
+        try {
+            dialog.getDialogPane().setContent(fxmlLoader.load());
+        } catch (IOException e) {
+            System.out.println("Couldn't load the dialog");
+            e.printStackTrace();
+            return;
+        }
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+
+        dialog.showAndWait();
+        cancelButton.setVisible(false);
     }
 
 

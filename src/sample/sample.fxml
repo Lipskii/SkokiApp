@@ -32,7 +32,7 @@
     </rowConstraints>
     <children>
         <VBox fx:id="menuBox" alignment="TOP_CENTER" fillWidth="false" prefHeight="818.0" prefWidth="1098.0"
-              visible="false" GridPane.columnIndex="1" GridPane.rowIndex="4">
+              GridPane.columnIndex="1" GridPane.rowIndex="4">
             <children>
                 <Button fx:id="resultsButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
                         pickOnBounds="false" prefHeight="6.0" prefWidth="456.0" text="Results" textOverrun="CLIP">
@@ -71,6 +71,13 @@
                         <Font size="24.0"/>
                     </font>
                 </Button>
+                <Button fx:id="addVenueButton" alignment="CENTER" layoutX="405.0" layoutY="183.0"
+                        mnemonicParsing="false" onAction="#handleAddVenueButton" prefHeight="35.0" prefWidth="456.0"
+                        text="Add Venue">
+                    <font>
+                        <Font size="24.0"/>
+                    </font>
+                </Button>
             </children>
         </VBox>
         <Label fx:id="headingLabel" alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="130.0" prefWidth="1246.0"
@@ -98,7 +105,8 @@
             </GridPane.margin>
         </ListView>
         <VBox fx:id="addResultsTypeVBox" alignment="TOP_CENTER" prefHeight="571.0" prefWidth="1246.0" spacing="20"
-              GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP">
+              visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4"
+              GridPane.valignment="TOP">
             <children>
                 <ChoiceBox fx:id="selectResultsTypeChoiceBox" prefHeight="50.0" prefWidth="406.0"/>
                 <Button fx:id="selectResultsTypeButton" alignment="BOTTOM_RIGHT" mnemonicParsing="false"
@@ -116,8 +124,8 @@
             </opaqueInsets>
         </VBox>
         <Label fx:id="lowerLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="67.0" prefWidth="442.0"
-               text="Choose a type" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3"
-               GridPane.valignment="CENTER">
+               text="Choose a type" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER"
+               GridPane.rowIndex="3" GridPane.valignment="CENTER">
             <font>
                 <Font size="24.0"/>
             </font>
