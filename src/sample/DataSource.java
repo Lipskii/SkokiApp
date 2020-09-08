@@ -41,6 +41,23 @@ public class DataSource {
 
     }
 
+    public void addCity(Region region, String cityName) {
+        Session session = factory.getCurrentSession();
+        session.beginTransaction();
+        City city = new City(cityName, region);
+        session.save(city);
+        session.getTransaction().commit();
+    }
+
+    public Venue addVenue(String venueName, int yearOfOpening, int capacity, City city) {
+        Session session = factory.getCurrentSession();
+        session.beginTransaction();
+        Venue venue = new Venue(venueName, yearOfOpening, capacity, city);
+        session.save(venue);
+        session.getTransaction().commit();
+        return venue;
+    }
+
     public ObservableList<Region> getRegionList() {
         Session session = factory.getCurrentSession();
         regionObservableList = FXCollections.observableArrayList();
@@ -76,6 +93,7 @@ public class DataSource {
         }
 
         ObservableList<City> cities = FXCollections.observableArrayList(cityList);
+        cities.sort(City::compareTo);
         return cities;
     }
 
@@ -93,8 +111,7 @@ public class DataSource {
 
     public ObservableList<HillVersion> getHillVersionByHill(Hill hill) {
         List<HillVersion> hillVersions = hill.getHillVersions();
-        ObservableList<HillVersion> hillVersionObservableList = FXCollections.observableArrayList(hillVersions);
-        return hillVersionObservableList;
+        return FXCollections.observableArrayList(hillVersions);
     }
 
     public ObservableList getSeriesList() {
