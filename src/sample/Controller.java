@@ -11,8 +11,6 @@ import java.io.IOException;
 
 public class Controller {
 
-    private DataSource dataSource;
-
     @FXML
     private Button addResultButton;
     @FXML
@@ -49,7 +47,6 @@ public class Controller {
 
 
     public void initialize() {
-        dataSource = new DataSource();
 //        cancelButton.setOnKeyPressed(new EventHandler<KeyEvent>() {
 //            @Override
 //            public void handle(final KeyEvent event) {
