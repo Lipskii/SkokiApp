@@ -7,7 +7,7 @@ import org.hibernate.cfg.Configuration;
 import java.util.Arrays;
 import java.util.List;
 
-public class Test {
+public class Tryout {
     public static void main(String[] args) {
         SessionFactory factory = new Configuration().configure()
                 .addAnnotatedClass(Subseries.class)
