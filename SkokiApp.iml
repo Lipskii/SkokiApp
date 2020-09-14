@@ -9,5 +9,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="hibernate-commons-annotations-5.1.0.Final" level="project" />
     <orderEntry type="library" name="org.jfxtras:jmetro:11.6.12" level="project" />
+    <orderEntry type="library" name="javafx-swt" level="application" />
   </component>
 </module>

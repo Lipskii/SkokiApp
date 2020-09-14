@@ -5,10 +5,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import static java.lang.Integer.parseInt;
 
@@ -28,6 +25,8 @@ public class AddVenueController {
     @FXML
     Label venueAddedLabel;
     @FXML
+    ListView<Venue> venuesListView;
+    @FXML
     TextField capacityTextField;
     @FXML
     TextField cityNameTextField;
@@ -39,11 +38,10 @@ public class AddVenueController {
     public void initialize() {
         dataSource = new DataSource();
 
-        countryComboBox.setItems(FXCollections.observableArrayList(dataSource.getCountryList()));
+        countryComboBox.setItems(dataSource.getCountryList());
         countryComboBox.valueProperty().addListener((observableValue, country, t1) -> {
-            Country country1 = countryComboBox.getValue();
-            ObservableList<City> cities = dataSource.getCityByCountry(country1);
-            ObservableList<Region> regions = dataSource.getRegionsByCountry(country1);
+            ObservableList<City> cities = dataSource.getCityByCountry(t1);
+            ObservableList<Region> regions = dataSource.getRegionsByCountry(t1);
             cityComboBox.setItems(cities);
             regionComboBox.setItems(regions);
         });
@@ -56,6 +54,11 @@ public class AddVenueController {
                     capacityTextField.setText(t1.replaceAll("[^\\d]", ""));
                 }
             }
+        });
+
+        cityComboBox.valueProperty().addListener((observableValue, city, t1) -> {
+            ObservableList<Venue> venues = dataSource.getVenueByCity(t1);
+            venuesListView.setItems(venues);
         });
 
         //to prevent user from typing not digits

@@ -1,6 +1,9 @@
 <component name="libraryTable">
   <library name="org.jfxtras:jmetro:11.6.12" type="repository">
     <properties maven-id="org.jfxtras:jmetro:11.6.12" />
+    <ANNOTATIONS>
+      <root url="file://$PROJECT_DIR$/lib" />
+    </ANNOTATIONS>
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/lib/jmetro-11.6.12.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/javafx-controls-11.0.2-win.jar!/" />
