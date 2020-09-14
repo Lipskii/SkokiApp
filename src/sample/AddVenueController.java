@@ -57,8 +57,12 @@ public class AddVenueController {
         });
 
         cityComboBox.valueProperty().addListener((observableValue, city, t1) -> {
-            ObservableList<Venue> venues = dataSource.getVenueByCity(t1);
-            venuesListView.setItems(venues);
+            if (t1 != null) {
+                ObservableList<Venue> venues = dataSource.getVenueByCity(t1);
+                venuesListView.setItems(venues);
+            } else {
+                venuesListView.setItems(FXCollections.observableArrayList());
+            }
         });
 
         //to prevent user from typing not digits
@@ -90,6 +94,9 @@ public class AddVenueController {
             Venue venue = dataSource.addVenue(venueNameTextField.getText(), parseInt(yearOfOpeningTextField.getText()),
                     capacity, cityComboBox.getValue());
             venueAddedLabel.setText("Venue: " + venue.toString() + " added.");
+            System.out.println("**************************************************************888");
+            System.out.println(cityComboBox.getValue());
+            venuesListView.setItems(dataSource.getVenueByCity(cityComboBox.getValue()));
         } else {
             venueAddedLabel.setText("Fields with * cannot be empty!");
         }

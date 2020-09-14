@@ -100,6 +100,7 @@ public class DataSource {
     public ObservableList<Venue> getVenueByCity(City city) {
         List<Venue> venues = city.getVenues();
         ObservableList<Venue> venueObservableList = FXCollections.observableArrayList(venues);
+        venueObservableList.sort(Venue::compareTo);
         return venueObservableList;
     }
 

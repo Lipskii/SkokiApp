@@ -3,8 +3,7 @@ package sample;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 
 import javax.xml.crypto.Data;
 
@@ -20,9 +19,25 @@ public class AddHillController {
     ComboBox<Venue> venueComboBox;
     @FXML
     ListView<Hill> hillListView;
+    @FXML
+    RadioButton plasticMattingRadioButtonYes;
+    @FXML
+    RadioButton plasticMattingRadioButtonNo;
+    @FXML
+    TextField hillNameTextField;
+    @FXML
+    TextField lastReconstructionTextField;
+    @FXML
+    TextField reconstructionsTextField;
+    @FXML
+    TextField yearOfConstructionTextField;
 
     public void initialize() {
         dataSource = new DataSource();
+
+        final ToggleGroup group = new ToggleGroup();
+        plasticMattingRadioButtonNo.setToggleGroup(group);
+        plasticMattingRadioButtonYes.setToggleGroup(group);
 
         countryComboBox.setItems(dataSource.getCountryList());
         countryComboBox.valueProperty().addListener((observableValue, country, t1) -> {
@@ -34,7 +49,7 @@ public class AddHillController {
         });
 
         venueComboBox.valueProperty().addListener((observableValue, venue, t1) -> {
-            System.out.println();
+            hillListView.setItems(dataSource.getHillByVenue(t1));
         });
     }
 }

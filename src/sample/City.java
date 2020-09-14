@@ -81,7 +81,6 @@ public class City implements Comparable<City> {
 
     @Override
     public int compareTo(City city) {
-        System.out.println("SORTUJĘ " + city.city + " i " + this.city + " Wynik: " + city.city.compareTo(this.city));
         return city.city.compareTo(this.city) * -1;
     }
 }
