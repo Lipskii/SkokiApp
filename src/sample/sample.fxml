@@ -37,51 +37,58 @@
                 <Button fx:id="resultsButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
                         pickOnBounds="false" prefHeight="6.0" prefWidth="456.0" text="Results" textOverrun="CLIP">
                     <font>
-                        <Font size="24.0"/>
+                        <Font size="17.0"/>
                     </font>
                 </Button>
                 <Button fx:id="allTimeRankingButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
                         prefHeight="32.0" prefWidth="456.0" text="All-time Ranking" textAlignment="CENTER"
                         wrapText="true">
                     <font>
-                        <Font size="24.0"/>
+                        <Font size="17.0"/>
                     </font>
                 </Button>
                 <Button fx:id="skiJumpersButton" alignment="CENTER" mnemonicParsing="false" prefHeight="35.0"
                         prefWidth="456.0" text="Ski Jumpers">
                     <font>
-                        <Font size="24.0"/>
+                        <Font size="17.0"/>
                     </font>
                 </Button>
                 <Button fx:id="juryButton" alignment="CENTER" mnemonicParsing="false" prefHeight="35.0"
                         prefWidth="456.0" text="Jury">
                     <font>
-                        <Font size="24.0"/>
+                        <Font size="17.0"/>
                     </font>
                 </Button>
                 <Button fx:id="hillsButton" alignment="CENTER" mnemonicParsing="false" prefHeight="35.0"
                         prefWidth="456.0" text="Hills">
                     <font>
-                        <Font size="24.0"/>
+                        <Font size="17.0"/>
                     </font>
                 </Button>
                 <Button fx:id="addResultButton" alignment="CENTER" mnemonicParsing="false"
                         onAction="#handleAddResultButton" prefHeight="35.0" prefWidth="456.0" text="Add Result">
                     <font>
-                        <Font size="24.0"/>
+                        <Font size="17.0"/>
                     </font>
                 </Button>
                 <Button fx:id="addVenueButton" alignment="CENTER" layoutX="405.0" layoutY="183.0"
                         mnemonicParsing="false" onAction="#handleAddVenueButton" prefHeight="35.0" prefWidth="456.0"
                         text="Add Venue">
                     <font>
-                        <Font size="24.0"/>
+                        <Font size="17.0"/>
                     </font>
                 </Button>
                 <Button fx:id="addHillButton" alignment="CENTER" mnemonicParsing="false" onAction="#handleAddHillButton"
                         prefWidth="456.0" text="Add Hill" textAlignment="CENTER">
                     <font>
-                        <Font size="24.0"/>
+                        <Font size="17.0"/>
+                    </font>
+                </Button>
+                <Button fx:id="addHillVersionButton" alignment="CENTER" mnemonicParsing="false"
+                        onAction="#handleAddHillVersionButton" prefWidth="456.0" text="Add Hill Version"
+                        textAlignment="CENTER">
+                    <font>
+                        <Font size="17.0"/>
                     </font>
                 </Button>
             </children>

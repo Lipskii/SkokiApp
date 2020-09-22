@@ -31,20 +31,25 @@ public class Tryout {
                 .buildSessionFactory();
 
         try (factory; Session session = factory.getCurrentSession()) {
+            DataSource dataSource = new DataSource();
             session.beginTransaction();
 
-            Country country = session.get(Country.class, 166);
+            //      Country country = session.get(Country.class, 166);
 
             //  System.out.println(country.getRegions());
 
-            List<Country> countries = session.createQuery("from Country").getResultList();
+            //        List<Country> countries = session.createQuery("from Country").getResultList();
             //    System.out.println(Arrays.toString(countries.toArray()));
-            session.getTransaction().commit();
 
-            DataSource dataSource = new DataSource();
-            //   dataSource.getRegionList();
-            List<Country> countries1 = dataSource.getCountryList();
-            dataSource.getCityByCountry(countries1.get(176));
+
+//            //   dataSource.getRegionList();
+//            List<Country> countries1 = dataSource.getCountryList();
+//            dataSource.getCityByCountry(countries1.get(176));
+
+            Country country1 = session.get(Country.class, 177);
+            System.out.println(country1);
+            session.getTransaction().commit();
+            List<Hill> hills = dataSource.getHillByCountry(country1);
 
 
         }

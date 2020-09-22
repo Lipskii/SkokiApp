@@ -14,6 +14,8 @@ public class Controller {
     @FXML
     private Button addHillButton;
     @FXML
+    private Button addHillVersionButton;
+    @FXML
     private Button addResultButton;
     @FXML
     private Button addVenueButton;
@@ -68,6 +70,27 @@ public class Controller {
         dialog.setHeaderText("Select");
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("AddHill.fxml"));
+        try {
+            dialog.getDialogPane().setContent(fxmlLoader.load());
+        } catch (IOException e) {
+            System.out.println("Couldn't load the dialog");
+            e.printStackTrace();
+            return;
+        }
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+
+        dialog.showAndWait();
+    }
+
+    @FXML
+    public void handleAddHillVersionButton() {
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.initOwner(mainGridPane.getScene().getWindow());
+        dialog.setTitle("Add Hill Version");
+        dialog.setHeaderText("Select");
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("AddHillVersion.fxml"));
         try {
             dialog.getDialogPane().setContent(fxmlLoader.load());
         } catch (IOException e) {

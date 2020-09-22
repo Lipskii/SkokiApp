@@ -62,7 +62,7 @@ public class DataSource {
         Session session = factory.getCurrentSession();
         regionObservableList = FXCollections.observableArrayList();
         session.beginTransaction();
-        List<Region> regions = session.createQuery("from Region").getResultList();
+        List<Region> regions = session.createQuery("FROM Region").getResultList();
         session.getTransaction().commit();
         regionObservableList.addAll(regions);
         return regionObservableList;
@@ -72,7 +72,7 @@ public class DataSource {
         Session session = factory.getCurrentSession();
         countryObservableList = FXCollections.observableArrayList();
         session.beginTransaction();
-        List<Country> countries = session.createQuery("from Country").getResultList();
+        List<Country> countries = session.createQuery("FROM Country").getResultList();
         session.getTransaction().commit();
         countryObservableList.addAll(countries);
         return countryObservableList;
@@ -119,7 +119,7 @@ public class DataSource {
         Session session = factory.getCurrentSession();
         ObservableList<Series> series = FXCollections.observableArrayList();
         session.beginTransaction();
-        List<Series> seriesList = session.createQuery("from Series").getResultList();
+        List<Series> seriesList = session.createQuery("FROM Series").getResultList();
         session.getTransaction().commit();
         series.addAll(seriesList);
         return series;
@@ -129,9 +129,19 @@ public class DataSource {
         Session session = factory.getCurrentSession();
         ObservableList<Subseries> subseries = FXCollections.observableArrayList();
         session.beginTransaction();
-        List<Subseries> subSeriesList = session.createQuery("from Subseries").getResultList();
+        List<Subseries> subSeriesList = session.createQuery("FROM Subseries").getResultList();
         session.getTransaction().commit();
         subseries.addAll(subSeriesList);
         return subseries;
+    }
+
+    public ObservableList<Hill> getHillByCountry(Country country) {
+        Session session = factory.getCurrentSession();
+        session.beginTransaction();
+        List hills = session.createQuery("FROM Hill h JOIN FETCH h.venue.city.region.country Country " +
+                "WHERE h.venue.city.region.country.id = " + country.getIdCountry()).getResultList();
+        session.getTransaction().commit();
+
+        return FXCollections.observableArrayList(hills);
     }
 }

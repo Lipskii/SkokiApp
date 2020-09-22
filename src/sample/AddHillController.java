@@ -40,16 +40,10 @@ public class AddHillController {
         plasticMattingRadioButtonYes.setToggleGroup(group);
 
         countryComboBox.setItems(dataSource.getCountryList());
-        countryComboBox.valueProperty().addListener((observableValue, country, t1) -> {
-            cityComboBox.setItems(dataSource.getCityByCountry(t1));
-        });
+        countryComboBox.valueProperty().addListener((observableValue, country, t1) -> cityComboBox.setItems(dataSource.getCityByCountry(t1)));
 
-        cityComboBox.valueProperty().addListener((observableValue, city, t1) -> {
-            venueComboBox.setItems(dataSource.getVenueByCity(t1));
-        });
+        cityComboBox.valueProperty().addListener((observableValue, city, t1) -> venueComboBox.setItems(dataSource.getVenueByCity(t1)));
 
-        venueComboBox.valueProperty().addListener((observableValue, venue, t1) -> {
-            hillListView.setItems(dataSource.getHillByVenue(t1));
-        });
+        venueComboBox.valueProperty().addListener((observableValue, venue, t1) -> hillListView.setItems(dataSource.getHillByVenue(t1)));
     }
 }
