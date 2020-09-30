@@ -38,6 +38,37 @@ public class AddVenueController {
     public void initialize() {
         dataSource = new DataSource();
 
+        refresh();
+    }
+
+    @FXML
+    public void handleAddCityButton() {
+        if ((regionComboBox.getValue() != null) && !cityNameTextField.getText().isEmpty()) {
+            dataSource.addCity(regionComboBox.getValue(), cityNameTextField.getText());
+            ObservableList<City> cities = dataSource.getCityByCountry(countryComboBox.getValue());
+            cityComboBox.setItems(cities);
+        }
+    }
+
+    @FXML
+    public void handleAddVenueButton() {
+        int capacity;
+        if (capacityTextField.getText().isEmpty()) {
+            capacity = 0;
+        } else {
+            capacity = parseInt(capacityTextField.getText());
+        }
+        if (!venueNameTextField.getText().isEmpty() && !yearOfOpeningTextField.getText().isEmpty() && (cityComboBox.getValue() != null)) {
+            Venue venue = dataSource.addVenue(venueNameTextField.getText(), parseInt(yearOfOpeningTextField.getText()),
+                    capacity, cityComboBox.getValue());
+            venueAddedLabel.setText("Venue: " + venue.toString() + " added.");
+            venuesListView.setItems(dataSource.getVenueByCity(cityComboBox.getValue()));
+        } else {
+            venueAddedLabel.setText("Fields with * cannot be empty!");
+        }
+    }
+
+    public void refresh() {
         countryComboBox.setItems(dataSource.getCountryList());
         countryComboBox.valueProperty().addListener((observableValue, country, t1) -> {
             ObservableList<City> cities = dataSource.getCityByCountry(t1);
@@ -46,7 +77,7 @@ public class AddVenueController {
             regionComboBox.setItems(regions);
         });
 
-        //to prevent user from typing not digits
+        //to prevent user from typing not digits; left it as a not-lambda on purpose
         capacityTextField.textProperty().addListener(new ChangeListener<>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
@@ -71,34 +102,5 @@ public class AddVenueController {
                 yearOfOpeningTextField.setText(t1.replaceAll("[^\\d]", ""));
             }
         });
-    }
-
-    @FXML
-    public void handleAddCityButton() {
-        if ((regionComboBox.getValue() != null) && !cityNameTextField.getText().isEmpty()) {
-            dataSource.addCity(regionComboBox.getValue(), cityNameTextField.getText());
-            ObservableList<City> cities = dataSource.getCityByCountry(countryComboBox.getValue());
-            cityComboBox.setItems(cities);
-        }
-    }
-
-    @FXML
-    public void handleAddVenueButton() {
-        int capacity;
-        if (capacityTextField.getText().isEmpty()) {
-            capacity = 0;
-        } else {
-            capacity = parseInt(capacityTextField.getText());
-        }
-        if (!venueNameTextField.getText().isEmpty() && !yearOfOpeningTextField.getText().isEmpty() && (cityComboBox.getValue() != null)) {
-            Venue venue = dataSource.addVenue(venueNameTextField.getText(), parseInt(yearOfOpeningTextField.getText()),
-                    capacity, cityComboBox.getValue());
-            venueAddedLabel.setText("Venue: " + venue.toString() + " added.");
-            System.out.println("**************************************************************888");
-            System.out.println(cityComboBox.getValue());
-            venuesListView.setItems(dataSource.getVenueByCity(cityComboBox.getValue()));
-        } else {
-            venueAddedLabel.setText("Fields with * cannot be empty!");
-        }
     }
 }

@@ -14,7 +14,7 @@
         <GridPane hgap="10" prefHeight="575.0" prefWidth="1000.0" vgap="10">
             <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0"/>
-                <RowConstraints minHeight="10.0" prefHeight="30.0"/>
+                <RowConstraints minHeight="100.0" prefHeight="100.0"/>
             </rowConstraints>
             <columnConstraints>
                 <ColumnConstraints maxWidth="152.00000610351563" minWidth="10.0" prefWidth="129.60001220703126"/>
@@ -25,7 +25,7 @@
                 <ComboBox fx:id="countryComboBox" prefHeight="26.0" prefWidth="250.0" GridPane.columnIndex="1"/>
                 <Label text="Select Country:"/>
                 <Label text="Hills in the Country:" GridPane.rowIndex="1"/>
-                <ListView fx:id="hillListView" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1"
+                <ListView fx:id="hillListView" prefHeight="86.0" prefWidth="250.0" GridPane.columnIndex="1"
                           GridPane.rowIndex="1"/>
             </children>
         </GridPane>

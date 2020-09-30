@@ -79,9 +79,15 @@ public class DataSource {
     }
 
     public ObservableList<Region> getRegionsByCountry(Country country) {
-        List<Region> regions = country.getRegions();
-        ObservableList<Region> regionObservableList = FXCollections.observableList(regions);
-        return regionObservableList;
+        List<Region> regions;
+
+        if (country != null) {
+            regions = country.getRegions();
+        } else {
+            regions = Collections.emptyList();
+        }
+
+        return FXCollections.observableList(regions);
     }
 
     public ObservableList<City> getCityByCountry(Country country) {
@@ -98,16 +104,28 @@ public class DataSource {
     }
 
     public ObservableList<Venue> getVenueByCity(City city) {
-        List<Venue> venues = city.getVenues();
+        List<Venue> venues;
+        if (city != null) {
+            venues = city.getVenues();
+        } else {
+            venues = Collections.emptyList();
+        }
+
         ObservableList<Venue> venueObservableList = FXCollections.observableArrayList(venues);
         venueObservableList.sort(Venue::compareTo);
         return venueObservableList;
     }
 
     public ObservableList<Hill> getHillByVenue(Venue venue) {
-        List<Hill> hills = venue.getHills();
-        ObservableList<Hill> hillObservableList = FXCollections.observableArrayList(hills);
-        return hillObservableList;
+        List<Hill> hills;
+
+        if (venue != null) {
+            hills = venue.getHills();
+
+        } else {
+            hills = Collections.emptyList();
+        }
+        return FXCollections.observableArrayList(hills);
     }
 
     public ObservableList<HillVersion> getHillVersionByHill(Hill hill) {
@@ -143,5 +161,19 @@ public class DataSource {
         session.getTransaction().commit();
 
         return FXCollections.observableArrayList(hills);
+    }
+
+    public void addHill(String hillName,
+                        int yearOfConstruction,
+                        int lastReconstruction,
+                        String reconstructions,
+                        boolean plasticMatting, Venue venue) {
+
+        Session session = factory.getCurrentSession();
+        session.beginTransaction();
+        Hill hill = new Hill(hillName, yearOfConstruction, lastReconstruction, reconstructions, plasticMatting, venue);
+        session.save(hill);
+        session.getTransaction().commit();
+
     }
 }
