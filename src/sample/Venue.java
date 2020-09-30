@@ -103,6 +103,6 @@ public class Venue implements Comparable<Venue> {
 
     @Override
     public int compareTo(Venue venue) {
-        return venue.venue.compareTo(this.venue) * -1;
+        return this.venue.compareTo(venue.venue);
     }
 }

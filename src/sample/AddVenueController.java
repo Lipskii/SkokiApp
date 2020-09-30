@@ -45,8 +45,7 @@ public class AddVenueController {
     public void handleAddCityButton() {
         if ((regionComboBox.getValue() != null) && !cityNameTextField.getText().isEmpty()) {
             dataSource.addCity(regionComboBox.getValue(), cityNameTextField.getText());
-            ObservableList<City> cities = dataSource.getCityByCountry(countryComboBox.getValue());
-            cityComboBox.setItems(cities);
+            refresh();
         }
     }
 

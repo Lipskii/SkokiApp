@@ -63,10 +63,6 @@ public class TypeOfHill {
 
     @Override
     public String toString() {
-        return "TypeOfHill{" +
-                "idTypeOfHill=" + idTypeOfHill +
-                ", typeOfHill='" + typeOfHill + '\'' +
-                ", sizeDescription='" + sizeDescription + '\'' +
-                '}';
+        return typeOfHill;
     }
 }

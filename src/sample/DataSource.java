@@ -156,10 +156,11 @@ public class DataSource {
     public ObservableList<Hill> getHillByCountry(Country country) {
         Session session = factory.getCurrentSession();
         session.beginTransaction();
-        List hills = session.createQuery("FROM Hill h JOIN FETCH h.venue.city.region.country Country " +
+        List<Hill> hills = session.createQuery("FROM Hill h JOIN FETCH h.venue.city.region.country Country " +
                 "WHERE h.venue.city.region.country.id = " + country.getIdCountry()).getResultList();
         session.getTransaction().commit();
 
+        hills.sort(Hill::compareTo);
         return FXCollections.observableArrayList(hills);
     }
 
@@ -175,5 +176,14 @@ public class DataSource {
         session.save(hill);
         session.getTransaction().commit();
 
+    }
+
+    public ObservableList<TypeOfHill> getTypeOfHills() {
+        Session session = factory.getCurrentSession();
+        session.beginTransaction();
+        List<TypeOfHill> typeOfHillList = session.createQuery("FROM TypeOfHill").getResultList();
+        session.getTransaction().commit();
+
+        return FXCollections.observableArrayList(typeOfHillList);
     }
 }

@@ -2,11 +2,12 @@ package sample;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Entity
 @Table(name = "hill")
-public class Hill {
+public class Hill implements Comparable<Hill> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -120,5 +121,10 @@ public class Hill {
     @Override
     public String toString() {
         return hillName;
+    }
+
+    @Override
+    public int compareTo(Hill hill) {
+        return this.hillName.compareTo(hill.hillName);
     }
 }
