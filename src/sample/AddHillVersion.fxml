@@ -22,6 +22,8 @@
                 <RowConstraints maxHeight="94.3999938964844" minHeight="10.0" prefHeight="30.0"/>
                 <RowConstraints maxHeight="94.3999938964844" minHeight="10.0" prefHeight="30.0"/>
                 <RowConstraints maxHeight="94.3999938964844" minHeight="10.0" prefHeight="30.0"/>
+                <RowConstraints maxHeight="94.3999938964844" minHeight="10.0" prefHeight="30.0"/>
+                <RowConstraints maxHeight="94.3999938964844" minHeight="10.0" prefHeight="30.0"/>
                 <RowConstraints maxHeight="94.3999938964844"/>
                 <RowConstraints maxHeight="94.3999938964844"/>
                 <RowConstraints maxHeight="94.3999938964844"/>
@@ -63,6 +65,15 @@
                 <Label fx:id="takeOffAngleLabel" text="Take-off Angle" GridPane.columnIndex="2" GridPane.rowIndex="6"/>
                 <TextField fx:id="takeOffLengthTextField" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
                 <TextField fx:id="takeOffAngleTextField" GridPane.columnIndex="3" GridPane.rowIndex="6"/>
+                <Label fx:id="takeOfHeightLabel" text="Take-off Height" GridPane.rowIndex="7"/>
+                <TextField fx:id="takeOffHeightTextField" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+                <Label fx:id="kPointLabel" text="K-Point" GridPane.columnIndex="2" GridPane.rowIndex="7"/>
+                <TextField fx:id="kPointTextField" GridPane.columnIndex="3" GridPane.rowIndex="7"/>
+                <Label fx:id="hillSizeLabel" text="Hill Size" GridPane.rowIndex="8"/>
+                <TextField fx:id="hillSizeTextField" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
+                <Label fx:id="hillVersionRecordLabel" text="Version's Record" GridPane.columnIndex="2"
+                       GridPane.rowIndex="8"/>
+                <TextField fx:id="hillVersionRecordTextField" GridPane.columnIndex="3" GridPane.rowIndex="8"/>
             </children>
         </GridPane>
     </content>
