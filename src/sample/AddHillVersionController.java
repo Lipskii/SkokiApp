@@ -14,6 +14,8 @@ public class AddHillVersionController {
     // Group group;
 
     @FXML
+    Button addButton;
+    @FXML
     Button selectButton;
     @FXML
     ComboBox<Country> countryComboBox;
@@ -80,9 +82,7 @@ public class AddHillVersionController {
 
         refresh();
 
-        hillListView.getSelectionModel().selectedItemProperty().addListener((observableValue, hill, t1) -> {
-            selectedHill = t1;
-        });
+        hillListView.getSelectionModel().selectedItemProperty().addListener((observableValue, hill, t1) -> selectedHill = t1);
 
     }
 

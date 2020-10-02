@@ -24,6 +24,7 @@
                 <RowConstraints maxHeight="94.3999938964844" minHeight="10.0" prefHeight="30.0"/>
                 <RowConstraints maxHeight="94.3999938964844" minHeight="10.0" prefHeight="30.0"/>
                 <RowConstraints maxHeight="94.3999938964844" minHeight="10.0" prefHeight="30.0"/>
+                <RowConstraints maxHeight="94.3999938964844" minHeight="10.0" prefHeight="30.0"/>
                 <RowConstraints maxHeight="94.3999938964844"/>
                 <RowConstraints maxHeight="94.3999938964844"/>
                 <RowConstraints maxHeight="94.3999938964844"/>
@@ -47,7 +48,7 @@
                 <ComboBox fx:id="typeOfHillComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
                 <Button fx:id="selectButton" mnemonicParsing="false" onAction="#handleSelectButton" text="Select"
                         GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2"/>
-                <Label fx:id="selectionLabel" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                <Label fx:id="selectionLabel" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
                 <Label fx:id="firstYearOfThisVersionLabel" text="First year of this version" GridPane.rowIndex="4"/>
                 <TextField fx:id="firstYearTextField" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
                 <ListView fx:id="hillVersionListView" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3"
@@ -74,6 +75,8 @@
                 <Label fx:id="hillVersionRecordLabel" text="Version's Record" GridPane.columnIndex="2"
                        GridPane.rowIndex="8"/>
                 <TextField fx:id="hillVersionRecordTextField" GridPane.columnIndex="3" GridPane.rowIndex="8"/>
+                <Button fx:id="addButton" mnemonicParsing="false" text="Button" GridPane.columnIndex="3"
+                        GridPane.halignment="RIGHT" GridPane.rowIndex="9"/>
             </children>
         </GridPane>
     </content>
