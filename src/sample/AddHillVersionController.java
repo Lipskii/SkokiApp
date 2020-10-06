@@ -1,17 +1,19 @@
 package sample;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class AddHillVersionController {
 
     DataSource dataSource;
     Hill selectedHill;
-    // Group group;
+    private final List<Node> nodeList = new ArrayList<>();
+
 
     @FXML
     Button addButton;
@@ -75,10 +77,31 @@ public class AddHillVersionController {
     public void initialize() {
         dataSource = new DataSource();
 
-        // group = new Group();
-
-        //  group.getChildren().addAll(typeOfHillComboBox, typeOfHillLabel);
-
+        nodeList.add(typeOfHillComboBox);
+        nodeList.add(typeOfHillLabel);
+        nodeList.add(firstYearOfThisVersionLabel);
+        nodeList.add(firstYearTextField);
+        nodeList.add(lastYearOfThisVersionLabel);
+        nodeList.add(lastYearTextField);
+        nodeList.add(inrunAngleLabel);
+        nodeList.add(inrunAngleTextField);
+        nodeList.add(inrunLengthLabel);
+        nodeList.add(inrunLengthTextField);
+        nodeList.add(takeOffAngleLabel);
+        nodeList.add(takeOffAngleTextField);
+        nodeList.add(takeOfHeightLabel);
+        nodeList.add(takeOffHeightTextField);
+        nodeList.add(takeOffLengthLabel);
+        nodeList.add(takeOffLengthTextField);
+        nodeList.add(kPointLabel);
+        nodeList.add(kPointTextField);
+        nodeList.add(hillSizeLabel);
+        nodeList.add(hillSizeTextField);
+        nodeList.add(hillVersionRecordLabel);
+        nodeList.add(hillVersionRecordTextField);
+        nodeList.add(addButton);
+        nodeList.add(hillVersionListView);
+        nodeList.add(existingVersionsLabel);
 
         refresh();
 
@@ -91,18 +114,31 @@ public class AddHillVersionController {
     public void handleSelectButton() {
         if (selectedHill != null) {
             selectionLabel.setText("You've selected " + selectedHill);
-            //      group.setVisible(true);
-        } else
+            visibility(true);
+        } else {
             selectionLabel.setText("Choose a hill to proceed");
+            visibility(false);
+        }
+    }
+
+    @FXML
+    public void handleAddButton() {
+
     }
 
 
     public void refresh() {
-        //  group.setVisible(false);
-
         countryComboBox.setItems(dataSource.getCountryList());
         countryComboBox.valueProperty().addListener(((observableValue, country, t1) -> hillListView.setItems(dataSource.getHillByCountry(t1))));
 
         typeOfHillComboBox.setItems(dataSource.getTypeOfHills());
+    }
+
+    //temporary solution TODO(find better solution)
+    public void visibility(Boolean currentVisibility) {
+
+        for (Node node : nodeList) {
+            node.setVisible(currentVisibility);
+        }
     }
 }

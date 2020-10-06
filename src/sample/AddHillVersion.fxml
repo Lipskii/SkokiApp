@@ -44,39 +44,48 @@
                 <Label text="Hills in the Country:" GridPane.rowIndex="1"/>
                 <ListView fx:id="hillListView" prefHeight="186.0" prefWidth="250.0" GridPane.columnIndex="1"
                           GridPane.rowIndex="1"/>
-                <Label fx:id="typeOfHillLabel" text="Type of Hill" GridPane.rowIndex="3"/>
-                <ComboBox fx:id="typeOfHillComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                <Label fx:id="typeOfHillLabel" text="Type of Hill" visible="false" GridPane.rowIndex="3"/>
+                <ComboBox fx:id="typeOfHillComboBox" prefWidth="150.0" visible="false" GridPane.columnIndex="1"
+                          GridPane.rowIndex="3"/>
                 <Button fx:id="selectButton" mnemonicParsing="false" onAction="#handleSelectButton" text="Select"
                         GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2"/>
                 <Label fx:id="selectionLabel" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
-                <Label fx:id="firstYearOfThisVersionLabel" text="First year of this version" GridPane.rowIndex="4"/>
-                <TextField fx:id="firstYearTextField" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
-                <ListView fx:id="hillVersionListView" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3"
-                          GridPane.rowIndex="1"/>
-                <Label fx:id="existingVersionsLabel" text="Existing Versions" GridPane.columnIndex="2"
-                       GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER"/>
-                <Label fx:id="lastYearOfThisVersionLabel" text="Last year of this version" GridPane.columnIndex="2"
+                <Label fx:id="firstYearOfThisVersionLabel" text="First year of this version" visible="false"
                        GridPane.rowIndex="4"/>
-                <TextField fx:id="lastYearTextField" GridPane.columnIndex="3" GridPane.rowIndex="4"/>
-                <Label fx:id="inrunLengthLabel" text="Inrun Length" GridPane.rowIndex="5"/>
-                <TextField fx:id="inrunLengthTextField" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
-                <Label fx:id="inrunAngleLabel" text="Inrun Angle" GridPane.columnIndex="2" GridPane.rowIndex="5"/>
-                <TextField fx:id="inrunAngleTextField" GridPane.columnIndex="3" GridPane.rowIndex="5"/>
-                <Label fx:id="takeOffLengthLabel" text="Take_off Length" GridPane.rowIndex="6"/>
-                <Label fx:id="takeOffAngleLabel" text="Take-off Angle" GridPane.columnIndex="2" GridPane.rowIndex="6"/>
-                <TextField fx:id="takeOffLengthTextField" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
-                <TextField fx:id="takeOffAngleTextField" GridPane.columnIndex="3" GridPane.rowIndex="6"/>
-                <Label fx:id="takeOfHeightLabel" text="Take-off Height" GridPane.rowIndex="7"/>
-                <TextField fx:id="takeOffHeightTextField" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
-                <Label fx:id="kPointLabel" text="K-Point" GridPane.columnIndex="2" GridPane.rowIndex="7"/>
-                <TextField fx:id="kPointTextField" GridPane.columnIndex="3" GridPane.rowIndex="7"/>
-                <Label fx:id="hillSizeLabel" text="Hill Size" GridPane.rowIndex="8"/>
-                <TextField fx:id="hillSizeTextField" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
-                <Label fx:id="hillVersionRecordLabel" text="Version's Record" GridPane.columnIndex="2"
+                <TextField fx:id="firstYearTextField" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                <ListView fx:id="hillVersionListView" prefHeight="200.0" prefWidth="200.0" visible="false"
+                          GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+                <Label fx:id="existingVersionsLabel" text="Existing Versions" visible="false" GridPane.columnIndex="2"
+                       GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER"/>
+                <Label fx:id="lastYearOfThisVersionLabel" text="Last year of this version" visible="false"
+                       GridPane.columnIndex="2" GridPane.rowIndex="4"/>
+                <TextField fx:id="lastYearTextField" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="4"/>
+                <Label fx:id="inrunLengthLabel" text="Inrun Length" visible="false" GridPane.rowIndex="5"/>
+                <TextField fx:id="inrunLengthTextField" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                <Label fx:id="inrunAngleLabel" text="Inrun Angle" visible="false" GridPane.columnIndex="2"
+                       GridPane.rowIndex="5"/>
+                <TextField fx:id="inrunAngleTextField" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="5"/>
+                <Label fx:id="takeOffLengthLabel" text="Take_off Length" visible="false" GridPane.rowIndex="6"/>
+                <Label fx:id="takeOffAngleLabel" text="Take-off Angle" visible="false" GridPane.columnIndex="2"
+                       GridPane.rowIndex="6"/>
+                <TextField fx:id="takeOffLengthTextField" visible="false" GridPane.columnIndex="1"
+                           GridPane.rowIndex="6"/>
+                <TextField fx:id="takeOffAngleTextField" visible="false" GridPane.columnIndex="3"
+                           GridPane.rowIndex="6"/>
+                <Label fx:id="takeOfHeightLabel" text="Take-off Height" visible="false" GridPane.rowIndex="7"/>
+                <TextField fx:id="takeOffHeightTextField" visible="false" GridPane.columnIndex="1"
+                           GridPane.rowIndex="7"/>
+                <Label fx:id="kPointLabel" text="K-Point" visible="false" GridPane.columnIndex="2"
+                       GridPane.rowIndex="7"/>
+                <TextField fx:id="kPointTextField" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="7"/>
+                <Label fx:id="hillSizeLabel" text="Hill Size" visible="false" GridPane.rowIndex="8"/>
+                <TextField fx:id="hillSizeTextField" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
+                <Label fx:id="hillVersionRecordLabel" text="Version's Record" visible="false" GridPane.columnIndex="2"
                        GridPane.rowIndex="8"/>
-                <TextField fx:id="hillVersionRecordTextField" GridPane.columnIndex="3" GridPane.rowIndex="8"/>
-                <Button fx:id="addButton" mnemonicParsing="false" text="Button" GridPane.columnIndex="3"
-                        GridPane.halignment="RIGHT" GridPane.rowIndex="9"/>
+                <TextField fx:id="hillVersionRecordTextField" visible="false" GridPane.columnIndex="3"
+                           GridPane.rowIndex="8"/>
+                <Button fx:id="addButton" mnemonicParsing="false" onAction="#handleAddButton" text="Add Version"
+                        visible="false" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="9"/>
             </children>
         </GridPane>
     </content>
