@@ -3,9 +3,13 @@ package sample;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.text.Text;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class AddHillVersionController {
@@ -105,6 +109,56 @@ public class AddHillVersionController {
 
         refresh();
 
+        //TODO(fix: make user able to type dot)
+        inrunLengthTextField.textProperty().addListener((observableValue, s, t1) -> {
+            if (!t1.matches("\\d*")) {
+                inrunLengthTextField.setText(t1.replaceAll("[^\\d]", ""));
+            }
+        });
+
+        inrunAngleTextField.textProperty().addListener((observableValue, s, t1) -> {
+            if (!t1.matches("\\d*")) {
+                inrunAngleTextField.setText(t1.replaceAll("[^\\d]", ""));
+            }
+        });
+
+        takeOffLengthTextField.textProperty().addListener((observableValue, s, t1) -> {
+            if (!t1.matches("\\d*")) {
+                takeOffLengthTextField.setText(t1.replaceAll("[^\\d]", ""));
+            }
+        });
+
+        takeOffAngleTextField.textProperty().addListener((observableValue, s, t1) -> {
+            if (!t1.matches("\\d*")) {
+                takeOffAngleTextField.setText(t1.replaceAll("[^\\d]", ""));
+            }
+        });
+
+        takeOffHeightTextField.textProperty().addListener((observableValue, s, t1) -> {
+            if (!t1.matches("\\d*")) {
+                takeOffHeightTextField.setText(t1.replaceAll("[^\\d]", ""));
+            }
+        });
+
+        kPointTextField.textProperty().addListener((observableValue, s, t1) -> {
+            if (!t1.matches("\\d*")) {
+                kPointTextField.setText(t1.replaceAll("[^\\d]", ""));
+            }
+        });
+
+        hillSizeTextField.textProperty().addListener((observableValue, s, t1) -> {
+            if (!t1.matches("\\d*")) {
+                hillSizeTextField.setText(t1.replaceAll("[^\\d]", ""));
+            }
+        });
+
+        hillVersionRecordTextField.textProperty().addListener((observableValue, s, t1) -> {
+            if (!t1.matches("\\d*")) {
+                hillVersionRecordTextField.setText(t1.replaceAll("[^\\d]", ""));
+            }
+        });
+
+
         hillListView.getSelectionModel().selectedItemProperty().addListener((observableValue, hill, t1) -> selectedHill = t1);
 
     }
@@ -123,20 +177,48 @@ public class AddHillVersionController {
 
     @FXML
     public void handleAddButton() {
+        String firstYear = "not defined";
+        String lastYear = "not defined";
+        BigDecimal inrunLength = BigDecimal.valueOf(0);
+        BigDecimal inrunAngle = BigDecimal.valueOf(0);
+        BigDecimal takeOffLength = BigDecimal.valueOf(0);
+        BigDecimal takeOffHeight = BigDecimal.valueOf(0);
+        BigDecimal kPoint = BigDecimal.valueOf(0);
+        BigDecimal hillSize = BigDecimal.valueOf(0);
+        BigDecimal versionRecord = BigDecimal.valueOf(0);
+
+        if (firstYearTextField.getText() != null) firstYear = firstYearTextField.getText();
+        if (lastYearTextField.getText() != null) lastYear = lastYearTextField.getText();
+        if (inrunLengthTextField.getText() != null)
+            inrunLength = BigDecimal.valueOf(Long.parseLong(inrunLengthTextField.getText()));
+        if (inrunAngleTextField.getText() != null)
+            inrunAngle = BigDecimal.valueOf(Long.parseLong(inrunAngleTextField.getText()));
+        if (takeOffLengthTextField.getText() != null)
+            takeOffLength = BigDecimal.valueOf(Long.parseLong(takeOffLengthTextField.getText()));
+        if (takeOffHeightTextField.getText() != null)
+            takeOffHeight = BigDecimal.valueOf(Long.parseLong(takeOffHeightTextField.getText()));
+        if (kPointTextField.getText() != null)
+            kPoint = BigDecimal.valueOf(Long.parseLong(kPointTextField.getText()));
+        if (hillSizeTextField.getText() != null)
+            hillSize = BigDecimal.valueOf(Long.parseLong(hillSizeTextField.getText()));
+
+        dataSource.addHillVersion(firstYear, lastYear, inrunLength, inrunAngle, takeOffLength,
+                takeOffHeight, kPoint, hillSize, versionRecord, typeOfHillComboBox.getValue(), selectedHill);
+
 
     }
 
 
-    public void refresh() {
+    private void refresh() {
         countryComboBox.setItems(dataSource.getCountryList());
         countryComboBox.valueProperty().addListener(((observableValue, country, t1) -> hillListView.setItems(dataSource.getHillByCountry(t1))));
-
         typeOfHillComboBox.setItems(dataSource.getTypeOfHills());
+        typeOfHillComboBox.getSelectionModel().select(0);
     }
 
-    //temporary solution TODO(find better solution)
-    public void visibility(Boolean currentVisibility) {
 
+    //temporary solution TODO(find better solution)
+    private void visibility(Boolean currentVisibility) {
         for (Node node : nodeList) {
             node.setVisible(currentVisibility);
         }
