@@ -188,7 +188,12 @@ public class DataSource {
         return FXCollections.observableArrayList(typeOfHillList);
     }
 
-    public void addHillVersion(String firstYear, String lastYear, BigDecimal inrunLength, BigDecimal inrunAngle, BigDecimal takeOffLength, BigDecimal takeOffHeight, BigDecimal kPoint, BigDecimal hillSize, BigDecimal versionRecord, TypeOfHill value, Hill selectedHill) {
-
+    public void addHillVersion(int firstYear, int lastYear, BigDecimal takeOffAngle, BigDecimal inrunLength, BigDecimal inrunAngle, BigDecimal takeOffLength, BigDecimal takeOffHeight, BigDecimal kPoint, BigDecimal hillSize, BigDecimal versionRecord, TypeOfHill typeOfHill, Hill hill) {
+        Session session = factory.getCurrentSession();
+        session.beginTransaction();
+        HillVersion hillVersion = new HillVersion(firstYear, lastYear, inrunLength, inrunAngle, takeOffLength, takeOffAngle, takeOffHeight,
+                kPoint, hillSize, versionRecord, hill, typeOfHill);
+        session.save(hillVersion);
+        session.getTransaction().commit();
     }
 }

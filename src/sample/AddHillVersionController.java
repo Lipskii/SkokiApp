@@ -109,52 +109,64 @@ public class AddHillVersionController {
 
         refresh();
 
-        //TODO(fix: make user able to type dot)
-        inrunLengthTextField.textProperty().addListener((observableValue, s, t1) -> {
+        //fix later to prevent user from typing two dots
+        firstYearTextField.textProperty().addListener((observableValue, s, t1) -> {
             if (!t1.matches("\\d*")) {
-                inrunLengthTextField.setText(t1.replaceAll("[^\\d]", ""));
+                firstYearTextField.setText(t1.replaceAll("[^\\d]", ""));
+            }
+        });
+
+        lastYearTextField.textProperty().addListener((observableValue, s, t1) -> {
+            if (!t1.matches("\\d*")) {
+                lastYearTextField.setText(t1.replaceAll("[^\\d]", ""));
+            }
+        });
+
+        inrunLengthTextField.textProperty().addListener((observableValue, s, t1) -> {
+            if (!t1.matches("\\d*\\.")) {
+                inrunLengthTextField.setText(t1.replaceAll("[^\\d\\.]", ""));
             }
         });
 
         inrunAngleTextField.textProperty().addListener((observableValue, s, t1) -> {
-            if (!t1.matches("\\d*")) {
-                inrunAngleTextField.setText(t1.replaceAll("[^\\d]", ""));
+            if (!t1.matches("\\d*\\.")) {
+                inrunAngleTextField.setText(t1.replaceAll("[^\\d\\.]]", ""));
             }
         });
 
         takeOffLengthTextField.textProperty().addListener((observableValue, s, t1) -> {
-            if (!t1.matches("\\d*")) {
-                takeOffLengthTextField.setText(t1.replaceAll("[^\\d]", ""));
+            if (!t1.matches("\\d*\\.")) {
+                takeOffLengthTextField.setText(t1.replaceAll("[^\\d\\.]", ""));
             }
         });
 
         takeOffAngleTextField.textProperty().addListener((observableValue, s, t1) -> {
-            if (!t1.matches("\\d*")) {
-                takeOffAngleTextField.setText(t1.replaceAll("[^\\d]", ""));
+            if (!t1.matches("\\d*\\.")) {
+                takeOffAngleTextField.setText(t1.replaceAll("[^\\d\\.]", ""));
             }
         });
 
         takeOffHeightTextField.textProperty().addListener((observableValue, s, t1) -> {
-            if (!t1.matches("\\d*")) {
-                takeOffHeightTextField.setText(t1.replaceAll("[^\\d]", ""));
+            if (!t1.matches("\\d*\\.")) {
+                takeOffHeightTextField.setText(t1.replaceAll("[^\\d\\.]", ""));
             }
         });
 
         kPointTextField.textProperty().addListener((observableValue, s, t1) -> {
-            if (!t1.matches("\\d*")) {
-                kPointTextField.setText(t1.replaceAll("[^\\d]", ""));
+            if (!t1.matches("\\d*\\.")) {
+                kPointTextField.setText(t1.replaceAll("[^\\d\\.]", ""));
             }
         });
 
         hillSizeTextField.textProperty().addListener((observableValue, s, t1) -> {
-            if (!t1.matches("\\d*")) {
-                hillSizeTextField.setText(t1.replaceAll("[^\\d]", ""));
+            if (!t1.matches("\\d*\\.")) {
+                hillSizeTextField.setText(t1.replaceAll("[^\\d\\.]", ""));
             }
         });
 
         hillVersionRecordTextField.textProperty().addListener((observableValue, s, t1) -> {
-            if (!t1.matches("\\d*")) {
-                hillVersionRecordTextField.setText(t1.replaceAll("[^\\d]", ""));
+            if (!t1.matches("\\d*\\.")) {
+                hillVersionRecordTextField.setText(t1.replaceAll("[^\\d\\.]", ""));
             }
         });
 
@@ -177,32 +189,33 @@ public class AddHillVersionController {
 
     @FXML
     public void handleAddButton() {
-        String firstYear = "not defined";
-        String lastYear = "not defined";
+        Integer firstYear = 0;
+        Integer lastYear = 0;
         BigDecimal inrunLength = BigDecimal.valueOf(0);
         BigDecimal inrunAngle = BigDecimal.valueOf(0);
         BigDecimal takeOffLength = BigDecimal.valueOf(0);
         BigDecimal takeOffHeight = BigDecimal.valueOf(0);
+        BigDecimal takeOffAngle = BigDecimal.valueOf(0);
         BigDecimal kPoint = BigDecimal.valueOf(0);
         BigDecimal hillSize = BigDecimal.valueOf(0);
         BigDecimal versionRecord = BigDecimal.valueOf(0);
 
-        if (firstYearTextField.getText() != null) firstYear = firstYearTextField.getText();
-        if (lastYearTextField.getText() != null) lastYear = lastYearTextField.getText();
-        if (inrunLengthTextField.getText() != null)
-            inrunLength = BigDecimal.valueOf(Long.parseLong(inrunLengthTextField.getText()));
-        if (inrunAngleTextField.getText() != null)
-            inrunAngle = BigDecimal.valueOf(Long.parseLong(inrunAngleTextField.getText()));
-        if (takeOffLengthTextField.getText() != null)
-            takeOffLength = BigDecimal.valueOf(Long.parseLong(takeOffLengthTextField.getText()));
-        if (takeOffHeightTextField.getText() != null)
-            takeOffHeight = BigDecimal.valueOf(Long.parseLong(takeOffHeightTextField.getText()));
-        if (kPointTextField.getText() != null)
-            kPoint = BigDecimal.valueOf(Long.parseLong(kPointTextField.getText()));
-        if (hillSizeTextField.getText() != null)
-            hillSize = BigDecimal.valueOf(Long.parseLong(hillSizeTextField.getText()));
+        if (!firstYearTextField.getText().isEmpty()) firstYear = Integer.valueOf(firstYearTextField.getText());
+        if (!lastYearTextField.getText().isEmpty()) lastYear = Integer.valueOf(lastYearTextField.getText());
+        if (!inrunLengthTextField.getText().isEmpty())
+            inrunLength = BigDecimal.valueOf(Double.parseDouble(inrunLengthTextField.getText()));
+        if (!inrunAngleTextField.getText().isEmpty())
+            inrunAngle = BigDecimal.valueOf(Double.parseDouble(inrunAngleTextField.getText()));
+        if (!takeOffLengthTextField.getText().isEmpty())
+            takeOffLength = BigDecimal.valueOf(Double.parseDouble(takeOffLengthTextField.getText()));
+        if (!takeOffHeightTextField.getText().isEmpty())
+            takeOffHeight = BigDecimal.valueOf(Double.parseDouble(takeOffHeightTextField.getText()));
+        if (!kPointTextField.getText().isEmpty())
+            kPoint = BigDecimal.valueOf(Double.parseDouble(kPointTextField.getText()));
+        if (!hillSizeTextField.getText().isEmpty())
+            hillSize = BigDecimal.valueOf(Double.parseDouble(hillSizeTextField.getText()));
 
-        dataSource.addHillVersion(firstYear, lastYear, inrunLength, inrunAngle, takeOffLength,
+        dataSource.addHillVersion(firstYear, lastYear, inrunLength, inrunAngle, takeOffLength, takeOffAngle,
                 takeOffHeight, kPoint, hillSize, versionRecord, typeOfHillComboBox.getValue(), selectedHill);
 
 
