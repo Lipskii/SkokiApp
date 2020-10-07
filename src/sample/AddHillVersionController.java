@@ -1,15 +1,12 @@
 package sample;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.text.Text;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class AddHillVersionController {
@@ -171,7 +168,11 @@ public class AddHillVersionController {
         });
 
 
-        hillListView.getSelectionModel().selectedItemProperty().addListener((observableValue, hill, t1) -> selectedHill = t1);
+        hillListView.getSelectionModel().selectedItemProperty().addListener((observableValue, hill, t1) -> {
+            selectedHill = t1;
+            hillVersionListView.setItems(dataSource.getHillVersionByHill(selectedHill));
+        });
+
 
     }
 
@@ -189,8 +190,8 @@ public class AddHillVersionController {
 
     @FXML
     public void handleAddButton() {
-        Integer firstYear = 0;
-        Integer lastYear = 0;
+        int firstYear = 0;
+        int lastYear = 0;
         BigDecimal inrunLength = BigDecimal.valueOf(0);
         BigDecimal inrunAngle = BigDecimal.valueOf(0);
         BigDecimal takeOffLength = BigDecimal.valueOf(0);
@@ -200,12 +201,14 @@ public class AddHillVersionController {
         BigDecimal hillSize = BigDecimal.valueOf(0);
         BigDecimal versionRecord = BigDecimal.valueOf(0);
 
-        if (!firstYearTextField.getText().isEmpty()) firstYear = Integer.valueOf(firstYearTextField.getText());
-        if (!lastYearTextField.getText().isEmpty()) lastYear = Integer.valueOf(lastYearTextField.getText());
+        if (!firstYearTextField.getText().isEmpty()) firstYear = Integer.parseInt(firstYearTextField.getText());
+        if (!lastYearTextField.getText().isEmpty()) lastYear = Integer.parseInt(lastYearTextField.getText());
         if (!inrunLengthTextField.getText().isEmpty())
             inrunLength = BigDecimal.valueOf(Double.parseDouble(inrunLengthTextField.getText()));
         if (!inrunAngleTextField.getText().isEmpty())
             inrunAngle = BigDecimal.valueOf(Double.parseDouble(inrunAngleTextField.getText()));
+        if (!takeOffAngleTextField.getText().isEmpty())
+            takeOffAngle = BigDecimal.valueOf(Double.parseDouble(takeOffAngleTextField.getText()));
         if (!takeOffLengthTextField.getText().isEmpty())
             takeOffLength = BigDecimal.valueOf(Double.parseDouble(takeOffLengthTextField.getText()));
         if (!takeOffHeightTextField.getText().isEmpty())
@@ -214,17 +217,30 @@ public class AddHillVersionController {
             kPoint = BigDecimal.valueOf(Double.parseDouble(kPointTextField.getText()));
         if (!hillSizeTextField.getText().isEmpty())
             hillSize = BigDecimal.valueOf(Double.parseDouble(hillSizeTextField.getText()));
+        if (!hillVersionRecordTextField.getText().isEmpty())
+            versionRecord = BigDecimal.valueOf(Double.parseDouble(hillVersionRecordTextField.getText()));
+
 
         dataSource.addHillVersion(firstYear, lastYear, inrunLength, inrunAngle, takeOffLength, takeOffAngle,
                 takeOffHeight, kPoint, hillSize, versionRecord, typeOfHillComboBox.getValue(), selectedHill);
 
+        visibility(false);
+        //TODO(Fix bug that happens after adding a version and changing the country)
+        refresh();
 
     }
 
 
     private void refresh() {
+        hillListView.setItems(FXCollections.emptyObservableList());
         countryComboBox.setItems(dataSource.getCountryList());
-        countryComboBox.valueProperty().addListener(((observableValue, country, t1) -> hillListView.setItems(dataSource.getHillByCountry(t1))));
+        countryComboBox.getSelectionModel().select(0);
+
+        countryComboBox.valueProperty().addListener(((observableValue, country, t1) -> {
+            hillListView.setItems(dataSource.getHillByCountry(t1));
+            visibility(false);
+        }));
+
         typeOfHillComboBox.setItems(dataSource.getTypeOfHills());
         typeOfHillComboBox.getSelectionModel().select(0);
     }

@@ -120,11 +120,13 @@ public class Hill implements Comparable<Hill> {
 //    }
     @Override
     public String toString() {
-        return hillName;
+        return venue + ": " + hillName;
     }
 
     @Override
     public int compareTo(Hill hill) {
-        return this.hillName.compareTo(hill.hillName);
+        String s1 = this.venue + this.hillName;
+        String s2 = hill.venue + hill.hillName;
+        return s1.compareTo(s2);
     }
 }

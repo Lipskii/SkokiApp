@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "hill_version")
-public class HillVersion {
+public class HillVersion implements Comparable<HillVersion> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -173,10 +173,16 @@ public class HillVersion {
     }
 
     @Override
+    public int compareTo(HillVersion hillVersion) {
+        return this.firstYear < hillVersion.firstYear ? 1 : 0;
+    }
+
+    @Override
     public String toString() {
-        return "FirstYear=" + firstYear +
-                ", lastYear=" + lastYear +
-                ", kPoint=" + kPoint +
-                ", hillSize=" + hillSize;
+        if (lastYear == 0) {
+            return firstYear + "- now" + " HS: " + hillSize;
+        } else
+            return firstYear + "-" + lastYear + " HS: " + hillSize;
+
     }
 }

@@ -33,7 +33,7 @@
             </rowConstraints>
             <columnConstraints>
                 <ColumnConstraints maxWidth="152.00000610351563" minWidth="10.0" prefWidth="129.60001220703126"/>
-                <ColumnConstraints maxWidth="166.4" minWidth="250.0" prefWidth="300.0"/>
+                <ColumnConstraints maxWidth="166.4" minWidth="400.0" prefWidth="300.0"/>
                 <ColumnConstraints maxWidth="166.4" minWidth="129.0" prefWidth="129.0"/>
                 <ColumnConstraints maxWidth="166.4" minWidth="250.0" prefWidth="250.0"/>
                 <ColumnConstraints maxWidth="95.19998168945312" minWidth="0.0" prefWidth="0.0"/>
@@ -42,7 +42,7 @@
                 <ComboBox fx:id="countryComboBox" prefHeight="26.0" prefWidth="250.0" GridPane.columnIndex="1"/>
                 <Label text="Select Country:"/>
                 <Label text="Hills in the Country:" GridPane.rowIndex="1"/>
-                <ListView fx:id="hillListView" prefHeight="186.0" prefWidth="250.0" GridPane.columnIndex="1"
+                <ListView fx:id="hillListView" prefHeight="101.0" prefWidth="278.0" GridPane.columnIndex="1"
                           GridPane.rowIndex="1"/>
                 <Label fx:id="typeOfHillLabel" text="Type of Hill" visible="false" GridPane.rowIndex="3"/>
                 <ComboBox fx:id="typeOfHillComboBox" prefWidth="150.0" visible="false" GridPane.columnIndex="1"

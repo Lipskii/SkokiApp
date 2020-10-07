@@ -13,7 +13,7 @@ import java.util.*;
 
 public class DataSource {
 
-    SessionFactory factory;
+    private final SessionFactory factory;
     //Session session;
     ObservableList<Region> regionObservableList;
     ObservableList<Country> countryObservableList;
@@ -130,7 +130,15 @@ public class DataSource {
     }
 
     public ObservableList<HillVersion> getHillVersionByHill(Hill hill) {
-        List<HillVersion> hillVersions = hill.getHillVersions();
+        List<HillVersion> hillVersions;
+
+        if (hill != null) {
+            hillVersions = hill.getHillVersions();
+        } else {
+            hillVersions = Collections.emptyList();
+        }
+
+        hillVersions.sort(HillVersion::compareTo);
         return FXCollections.observableArrayList(hillVersions);
     }
 
@@ -161,6 +169,10 @@ public class DataSource {
                 "WHERE h.venue.city.region.country.id = " + country.getIdCountry()).getResultList();
         session.getTransaction().commit();
 
+        if (hills == null) {
+            hills = Collections.emptyList();
+        }
+
         hills.sort(Hill::compareTo);
         return FXCollections.observableArrayList(hills);
     }
@@ -188,7 +200,9 @@ public class DataSource {
         return FXCollections.observableArrayList(typeOfHillList);
     }
 
-    public void addHillVersion(int firstYear, int lastYear, BigDecimal takeOffAngle, BigDecimal inrunLength, BigDecimal inrunAngle, BigDecimal takeOffLength, BigDecimal takeOffHeight, BigDecimal kPoint, BigDecimal hillSize, BigDecimal versionRecord, TypeOfHill typeOfHill, Hill hill) {
+    public void addHillVersion(int firstYear, int lastYear, BigDecimal inrunLength, BigDecimal inrunAngle,
+                               BigDecimal takeOffLength, BigDecimal takeOffAngle, BigDecimal takeOffHeight,
+                               BigDecimal kPoint, BigDecimal hillSize, BigDecimal versionRecord, TypeOfHill typeOfHill, Hill hill) {
         Session session = factory.getCurrentSession();
         session.beginTransaction();
         HillVersion hillVersion = new HillVersion(firstYear, lastYear, inrunLength, inrunAngle, takeOffLength, takeOffAngle, takeOffHeight,
