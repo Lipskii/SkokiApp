@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<DialogPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AddPeopleController">
+
+    <content>
+        <GridPane hgap="10" prefHeight="575.0" prefWidth="1000.0" vgap="10">
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0"/>
+                <RowConstraints maxHeight="60.800000000000004" minHeight="200.0" prefHeight="44.800000000000004"/>
+                <RowConstraints maxHeight="25.599996948242193" minHeight="40.0" prefHeight="16.0"/>
+                <RowConstraints minHeight="40.0" prefHeight="40.0"/>
+                <RowConstraints minHeight="40.0" prefHeight="40.0"/>
+                <RowConstraints minHeight="40.0" prefHeight="40.0"/>
+                <RowConstraints minHeight="40.0" prefHeight="40.0"/>
+                <RowConstraints minHeight="40.0" prefHeight="40.0"/>
+            </rowConstraints>
+            <columnConstraints>
+                <ColumnConstraints minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints minWidth="300.0" prefWidth="400.0"/>
+            </columnConstraints>
+            <children>
+                <Label text="Firstname:" GridPane.rowIndex="2"/>
+                <Label text="Lastname:" GridPane.rowIndex="3"/>
+                <ListView fx:id="personListView" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1"
+                          GridPane.rowIndex="1"/>
+                <Label text="Birthday:" GridPane.rowIndex="4"/>
+                <Label text="Country:" GridPane.rowIndex="5"/>
+                <Label text="City:" GridPane.rowIndex="6"/>
+                <Label text="Roles:" GridPane.rowIndex="7"/>
+                <TextField fx:id="searchTextField" GridPane.columnIndex="1"/>
+                <Label text="Search:"/>
+                <TextField fx:id="firstNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                <TextField fx:id="lastNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                <TextField fx:id="birthdayTextField" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                <ComboBox fx:id="countryComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                <ComboBox fx:id="cityComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+                <RadioButton fx:id="skiJumperRadioButton" mnemonicParsing="false" text="SkiJumper"
+                             GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+                <RadioButton fx:id="juryRadioButton" mnemonicParsing="false" text="Jury" GridPane.columnIndex="1"
+                             GridPane.halignment="CENTER" GridPane.rowIndex="7"/>
+                <ComboBox fx:id="juryTypeComboBox" prefWidth="150.0" promptText="Jury Type" GridPane.columnIndex="1"
+                          GridPane.halignment="RIGHT" GridPane.rowIndex="7"/>
+            </children>
+        </GridPane>
+    </content>
+
+</DialogPane>

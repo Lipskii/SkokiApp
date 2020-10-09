@@ -152,7 +152,6 @@ public class Controller {
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.initOwner(mainGridPane.getScene().getWindow());
         dialog.setTitle("Add venue");
-        dialog.setHeaderText("");
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("AddVenue.fxml"));
         try {
@@ -167,6 +166,29 @@ public class Controller {
 
         dialog.showAndWait();
         cancelButton.setVisible(false);
+    }
+
+    @FXML
+    public void handleAddPeopleButton() {
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.initOwner(mainGridPane.getScene().getWindow());
+        dialog.setTitle("Add People");
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("AddPeople.fxml"));
+        try {
+            dialog.getDialogPane().setContent(fxmlLoader.load());
+        } catch (IOException e) {
+            System.out.println("Couldn't load the dialog");
+            e.printStackTrace();
+            return;
+        }
+
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+
+        dialog.showAndWait();
+        cancelButton.setVisible(false);
+
     }
 
 

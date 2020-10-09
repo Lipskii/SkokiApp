@@ -210,4 +210,14 @@ public class DataSource {
         session.save(hillVersion);
         session.getTransaction().commit();
     }
+
+    public ObservableList<Person> getPeople() {
+        Session session = factory.getCurrentSession();
+        ObservableList<Person> people = FXCollections.observableArrayList();
+        session.beginTransaction();
+        List<Person> personList = session.createQuery("FROM Person").getResultList();
+        session.getTransaction().commit();
+        people.addAll(personList);
+        return people;
+    }
 }
