@@ -104,7 +104,9 @@ public class AddHillVersionController {
         nodeList.add(hillVersionListView);
         nodeList.add(existingVersionsLabel);
 
-        refresh();
+        typeOfHillComboBox.setItems(dataSource.getTypeOfHills());
+        typeOfHillComboBox.getSelectionModel().select(0);
+
 
         //fix later to prevent user from typing two dots
         firstYearTextField.textProperty().addListener((observableValue, s, t1) -> {
@@ -167,6 +169,13 @@ public class AddHillVersionController {
             }
         });
 
+        countryComboBox.setItems(dataSource.getCountryList());
+        countryComboBox.getSelectionModel().select(0);
+
+        countryComboBox.valueProperty().addListener(((observableValue, country, t1) -> {
+            hillListView.setItems(dataSource.getHillByCountry(t1));
+            visibility(false);
+        }));
 
         hillListView.getSelectionModel().selectedItemProperty().addListener((observableValue, hill, t1) -> {
             selectedHill = t1;
@@ -225,26 +234,8 @@ public class AddHillVersionController {
                 takeOffHeight, kPoint, hillSize, versionRecord, typeOfHillComboBox.getValue(), selectedHill);
 
         visibility(false);
-        //TODO(Fix bug that happens after adding a version and changing the country)
-        refresh();
 
     }
-
-
-    private void refresh() {
-        hillListView.setItems(FXCollections.emptyObservableList());
-        countryComboBox.setItems(dataSource.getCountryList());
-        countryComboBox.getSelectionModel().select(0);
-
-        countryComboBox.valueProperty().addListener(((observableValue, country, t1) -> {
-            hillListView.setItems(dataSource.getHillByCountry(t1));
-            visibility(false);
-        }));
-
-        typeOfHillComboBox.setItems(dataSource.getTypeOfHills());
-        typeOfHillComboBox.getSelectionModel().select(0);
-    }
-
 
     //temporary solution TODO(find better solution)
     private void visibility(Boolean currentVisibility) {

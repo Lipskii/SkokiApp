@@ -179,10 +179,16 @@ public class HillVersion implements Comparable<HillVersion> {
 
     @Override
     public String toString() {
+        String hs = hillSize.toString();
+
+        if (hs.equals("0.0")) {
+            hs = "";
+        }
+
         if (lastYear == 0) {
-            return firstYear + "- now" + " HS: " + hillSize;
+            return firstYear + "- now" + " K: " + kPoint + " HS: " + hs;
         } else
-            return firstYear + "-" + lastYear + " HS: " + hillSize;
+            return firstYear + "-" + lastYear + " K: " + kPoint + " HS: " + hs;
 
     }
 }
