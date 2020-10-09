@@ -1,29 +1,28 @@
 package sample;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+
+import java.time.LocalDate;
 
 public class AddPeopleController {
 
     DataSource dataSource;
 
     @FXML
-    ComboBox<City> cityComboBox;
+    Button addPersonButton;
     @FXML
-    ComboBox<JuryType> juryTypeComboBox;
+    ComboBox<City> cityComboBox;
     @FXML
     ComboBox<Country> countryComboBox;
     @FXML
+    DatePicker birthdayDatePicker;
+    @FXML
     ListView<Person> personListView;
     @FXML
-    RadioButton juryRadioButton;
+    RadioButton skiJumperNoButton;
     @FXML
-    RadioButton skiJumperRadioButton;
-    @FXML
-    TextField birthdayTextField;
+    RadioButton skiJumperYesButton;
     @FXML
     TextField firstNameTextField;
     @FXML
@@ -34,7 +33,20 @@ public class AddPeopleController {
     public void initialize() {
         dataSource = new DataSource();
 
+        final ToggleGroup toggleGroup = new ToggleGroup();
+
+        skiJumperNoButton.setToggleGroup(toggleGroup);
+        skiJumperYesButton.setToggleGroup(toggleGroup);
+
+        birthdayDatePicker.setValue(LocalDate.now());
+
         personListView.setItems(dataSource.getPeople());
+        countryComboBox.setItems(dataSource.getCountryList());
+        countryComboBox.getSelectionModel().select(0);
+        countryComboBox.valueProperty().addListener((observableValue, country, t1) -> {
+            cityComboBox.setItems(dataSource.getCityByCountry(t1));
+        });
+        
 
     }
 

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.DialogPane?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -27,7 +29,8 @@
             </rowConstraints>
             <columnConstraints>
                 <ColumnConstraints minWidth="10.0" prefWidth="100.0"/>
-                <ColumnConstraints minWidth="300.0" prefWidth="400.0"/>
+                <ColumnConstraints minWidth="300.0" prefWidth="300.0"/>
+                <ColumnConstraints minWidth="250.0" prefWidth="250.0"/>
             </columnConstraints>
             <children>
                 <Label text="Firstname:" GridPane.rowIndex="2"/>
@@ -37,20 +40,20 @@
                 <Label text="Birthday:" GridPane.rowIndex="4"/>
                 <Label text="Country:" GridPane.rowIndex="5"/>
                 <Label text="City:" GridPane.rowIndex="6"/>
-                <Label text="Roles:" GridPane.rowIndex="7"/>
+                <Label text="Ski Jumper?" GridPane.rowIndex="7"/>
                 <TextField fx:id="searchTextField" GridPane.columnIndex="1"/>
                 <Label text="Search:"/>
                 <TextField fx:id="firstNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
                 <TextField fx:id="lastNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-                <TextField fx:id="birthdayTextField" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
                 <ComboBox fx:id="countryComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
                 <ComboBox fx:id="cityComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
-                <RadioButton fx:id="skiJumperRadioButton" mnemonicParsing="false" text="SkiJumper"
-                             GridPane.columnIndex="1" GridPane.rowIndex="7"/>
-                <RadioButton fx:id="juryRadioButton" mnemonicParsing="false" text="Jury" GridPane.columnIndex="1"
+                <RadioButton fx:id="skiJumperYesButton" mnemonicParsing="false" text="Yes" GridPane.columnIndex="1"
+                             GridPane.rowIndex="7"/>
+                <Button fx:id="addPersonButton" mnemonicParsing="false" text="Add person" GridPane.columnIndex="1"
+                        GridPane.halignment="RIGHT" GridPane.rowIndex="7"/>
+                <RadioButton fx:id="skiJumperNoButton" mnemonicParsing="false" text="No" GridPane.columnIndex="1"
                              GridPane.halignment="CENTER" GridPane.rowIndex="7"/>
-                <ComboBox fx:id="juryTypeComboBox" prefWidth="150.0" promptText="Jury Type" GridPane.columnIndex="1"
-                          GridPane.halignment="RIGHT" GridPane.rowIndex="7"/>
+                <DatePicker fx:id="birthdayDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
             </children>
         </GridPane>
     </content>
