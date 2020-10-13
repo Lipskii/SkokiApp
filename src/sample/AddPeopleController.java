@@ -1,14 +1,12 @@
 package sample;
 
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-
+//TODO(add isActive? if ski jumper)
 public class AddPeopleController {
 
     DataSource dataSource;
@@ -75,12 +73,8 @@ public class AddPeopleController {
             regionComboBox.getSelectionModel().select(0);
         });
 
-        cityTextField.textProperty().addListener((observableValue, s, t1) -> {
-            if (cityTextField.getText().isEmpty()) {
-                addCityButton.setDisable(true);
-            } else
-                addCityButton.setDisable(false);
-        });
+        cityTextField.textProperty().addListener((observableValue, s, t1) ->
+                addCityButton.setDisable(cityTextField.getText().isEmpty()));
 
 
     }
