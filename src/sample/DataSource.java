@@ -52,6 +52,16 @@ public class DataSource {
         session.close();
     }
 
+    public City addCityReturnCity(Region region, String cityName) {
+        Session session = factory.getCurrentSession();
+        session.beginTransaction();
+        City city = new City(cityName, region);
+        session.save(city);
+        session.getTransaction().commit();
+        session.close();
+        return city;
+    }
+
     public Venue addVenue(String venueName, int yearOfOpening, int capacity, City city) {
         Session session = factory.getCurrentSession();
         session.beginTransaction();
@@ -94,6 +104,7 @@ public class DataSource {
             regions = Collections.emptyList();
         }
 
+        regions.sort(Region::compareTo);
         return FXCollections.observableList(regions);
     }
 

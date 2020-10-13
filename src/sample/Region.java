@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "region")
-public class Region {
+public class Region implements Comparable<Region> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -77,5 +77,10 @@ public class Region {
     @Override
     public String toString() {
         return region;
+    }
+
+    @Override
+    public int compareTo(Region region) {
+        return this.region.compareTo(region.region);
     }
 }

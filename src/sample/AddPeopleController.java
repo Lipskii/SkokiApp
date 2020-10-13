@@ -14,15 +14,21 @@ public class AddPeopleController {
     DataSource dataSource;
 
     @FXML
+    Button addCityButton;
+    @FXML
     Button addPersonButton;
     @FXML
     ComboBox<City> cityComboBox;
     @FXML
     ComboBox<Country> countryComboBox;
     @FXML
+    ComboBox<Region> regionComboBox;
+    @FXML
     DatePicker birthdayDatePicker;
     @FXML
     Label birthdayPickerLabel;
+    @FXML
+    Label cityAddedLabel;
     @FXML
     Label firstNameNotEmptyLabel;
     @FXML
@@ -33,6 +39,8 @@ public class AddPeopleController {
     RadioButton skiJumperNoButton;
     @FXML
     RadioButton skiJumperYesButton;
+    @FXML
+    TextField cityTextField;
     @FXML
     TextField firstNameTextField;
     @FXML
@@ -48,9 +56,12 @@ public class AddPeopleController {
         skiJumperNoButton.setToggleGroup(toggleGroup);
         skiJumperYesButton.setToggleGroup(toggleGroup);
 
+        addCityButton.setDisable(true);
+
         skiJumperYesButton.setSelected(true);
 
         birthdayDatePicker.getEditor().setText("2000-12-31");
+        //TODO(Add listener to prevent user from typing incorrect format)
 
 
         personListView.setItems(dataSource.getPeople());
@@ -60,7 +71,15 @@ public class AddPeopleController {
         countryComboBox.valueProperty().addListener((observableValue, country, t1) -> {
             cityComboBox.setItems(dataSource.getCityByCountry(t1));
             cityComboBox.getSelectionModel().select(0);
+            regionComboBox.setItems(dataSource.getRegionsByCountry(t1));
+            regionComboBox.getSelectionModel().select(0);
+        });
 
+        cityTextField.textProperty().addListener((observableValue, s, t1) -> {
+            if (cityTextField.getText().isEmpty()) {
+                addCityButton.setDisable(true);
+            } else
+                addCityButton.setDisable(false);
         });
 
 
@@ -99,7 +118,18 @@ public class AddPeopleController {
             personListView.setItems(dataSource.getPeople());
 
         }
+    }
 
+    @FXML
+    public void handleAddCityButton() {
+        if (regionComboBox.getValue() != null) {
+            int index = countryComboBox.getSelectionModel().getSelectedIndex();
+            City city = dataSource.addCityReturnCity(regionComboBox.getValue(), cityTextField.getText());
+            countryComboBox.setItems(dataSource.getCountryList());
+            countryComboBox.getSelectionModel().select(index);
+            cityTextField.clear();
+            cityAddedLabel.setText(city.toString() + " added!");
+        }
 
     }
 
