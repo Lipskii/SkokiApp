@@ -16,6 +16,8 @@ public class AddPeopleController {
     @FXML
     Button addPersonButton;
     @FXML
+    CheckBox isActiveCheckBox;
+    @FXML
     ComboBox<City> cityComboBox;
     @FXML
     ComboBox<Country> countryComboBox;
@@ -56,8 +58,10 @@ public class AddPeopleController {
 
         addCityButton.setDisable(true);
 
+
         skiJumperYesButton.setSelected(true);
 
+        skiJumperYesButton.selectedProperty().addListener((observableValue, aBoolean, t1) -> isActiveCheckBox.setDisable(!skiJumperYesButton.isSelected()));
         birthdayDatePicker.getEditor().setText("2000-12-31");
         //TODO(Add listener to prevent user from typing incorrect format)
 
@@ -106,11 +110,13 @@ public class AddPeopleController {
 
 
         if (!lastNameTextField.getText().isEmpty() && !firstNameTextField.getText().isEmpty()) {
-            dataSource.addPerson(firstNameTextField.getText(), lastNameTextField.getText(),
+            Person person = dataSource.addPerson(firstNameTextField.getText(), lastNameTextField.getText(),
                     birthdayDatePicker.getValue(), countryComboBox.getValue(), cityComboBox.getValue());
 
             personListView.setItems(dataSource.getPeople());
-
+            if (person != null && skiJumperYesButton.isSelected()) {
+                dataSource.addSkiJumper(person, isActiveCheckBox.isSelected());
+            }
         }
     }
 

@@ -21,7 +21,7 @@ public class SkiJumper {
     public SkiJumper() {
     }
 
-    public SkiJumper(boolean isActive, Person person) {
+    public SkiJumper(Person person, boolean isActive) {
         this.isActive = isActive;
         this.person = person;
     }

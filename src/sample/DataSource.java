@@ -1,8 +1,6 @@
 package sample;
 
-import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -246,7 +244,7 @@ public class DataSource {
         return people;
     }
 
-    public void addPerson(String firstName, String lastName, LocalDate birthday, Country country, City city) {
+    public Person addPerson(String firstName, String lastName, LocalDate birthday, Country country, City city) {
         Session session = factory.getCurrentSession();
         session.beginTransaction();
         Person person;
@@ -260,5 +258,15 @@ public class DataSource {
         session.getTransaction().commit();
         session.close();
 
+        return person;
+    }
+
+    public void addSkiJumper(Person person, boolean isActive) {
+        Session session = factory.getCurrentSession();
+        session.beginTransaction();
+        SkiJumper skiJumper = new SkiJumper(person, isActive);
+        session.save(skiJumper);
+        session.getTransaction().commit();
+        session.close();
     }
 }
