@@ -72,9 +72,9 @@ public class AddPeopleController {
         else
             lastNameNotEmptyLabel.setText("");
 
-
-        dataSource.addPerson(firstNameTextField.getText(), lastNameTextField.getText(),
-                birthdayDatePicker.getValue(), countryComboBox.getValue(), cityComboBox.getValue());
+        if (!lastNameTextField.getText().isEmpty() && !firstNameTextField.getText().isEmpty())
+            dataSource.addPerson(firstNameTextField.getText(), lastNameTextField.getText(),
+                    birthdayDatePicker.getValue(), countryComboBox.getValue(), cityComboBox.getValue());
 
         //TODO(Refresh personListView after addition)
 
