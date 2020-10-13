@@ -1,9 +1,12 @@
 package sample;
 
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 
 public class AddPeopleController {
@@ -18,6 +21,8 @@ public class AddPeopleController {
     ComboBox<Country> countryComboBox;
     @FXML
     DatePicker birthdayDatePicker;
+    @FXML
+    Label birthdayPickerLabel;
     @FXML
     Label firstNameNotEmptyLabel;
     @FXML
@@ -45,7 +50,8 @@ public class AddPeopleController {
 
         skiJumperYesButton.setSelected(true);
 
-        birthdayDatePicker.setValue(LocalDate.of(1999, 12, 31));
+        birthdayDatePicker.getEditor().setText("2000-12-31");
+
 
         personListView.setItems(dataSource.getPeople());
 
@@ -60,6 +66,7 @@ public class AddPeopleController {
 
     }
 
+
     @FXML
     public void handleAddPersonButton() {
         if (firstNameTextField.getText().isEmpty())
@@ -72,11 +79,27 @@ public class AddPeopleController {
         else
             lastNameNotEmptyLabel.setText("");
 
-        if (!lastNameTextField.getText().isEmpty() && !firstNameTextField.getText().isEmpty())
+
+        try {
+            birthdayDatePicker.setValue(LocalDate.parse(birthdayDatePicker.getEditor().getText()));
+            birthdayPickerLabel.setText("Date format: \"yyyy-mm-dd\"");
+
+        } catch (DateTimeParseException e) {
+            System.out.println(e.getErrorIndex());
+            System.out.println(e.getParsedString());
+            System.out.println(e.getMessage());
+            birthdayPickerLabel.setText("Incorrect Value! Date format: \"yyyy-mm-dd\"");
+        }
+
+
+        if (!lastNameTextField.getText().isEmpty() && !firstNameTextField.getText().isEmpty()) {
             dataSource.addPerson(firstNameTextField.getText(), lastNameTextField.getText(),
                     birthdayDatePicker.getValue(), countryComboBox.getValue(), cityComboBox.getValue());
 
-        //TODO(Refresh personListView after addition)
+            personListView.setItems(dataSource.getPeople());
+
+        }
+
 
     }
 
