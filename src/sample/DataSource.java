@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.*;
 
 public class DataSource {
@@ -48,6 +49,7 @@ public class DataSource {
         City city = new City(cityName, region);
         session.save(city);
         session.getTransaction().commit();
+        session.close();
     }
 
     public Venue addVenue(String venueName, int yearOfOpening, int capacity, City city) {
@@ -56,6 +58,7 @@ public class DataSource {
         Venue venue = new Venue(venueName, yearOfOpening, capacity, city);
         session.save(venue);
         session.getTransaction().commit();
+        session.close();
         return venue;
     }
 
@@ -66,6 +69,7 @@ public class DataSource {
         List<Region> regions = session.createQuery("FROM Region").getResultList();
         session.getTransaction().commit();
         regionObservableList.addAll(regions);
+        session.close();
         return regionObservableList;
     }
 
@@ -75,7 +79,9 @@ public class DataSource {
         session.beginTransaction();
         List<Country> countries = session.createQuery("FROM Country").getResultList();
         session.getTransaction().commit();
+        session.close();
         countryObservableList.addAll(countries);
+        session.close();
         return countryObservableList;
     }
 
@@ -149,6 +155,7 @@ public class DataSource {
         List<Series> seriesList = session.createQuery("FROM Series").getResultList();
         session.getTransaction().commit();
         series.addAll(seriesList);
+        session.close();
         return series;
     }
 
@@ -159,6 +166,7 @@ public class DataSource {
         List<Subseries> subSeriesList = session.createQuery("FROM Subseries").getResultList();
         session.getTransaction().commit();
         subseries.addAll(subSeriesList);
+        session.close();
         return subseries;
     }
 
@@ -174,6 +182,7 @@ public class DataSource {
         }
 
         hills.sort(Hill::compareTo);
+        session.close();
         return FXCollections.observableArrayList(hills);
     }
 
@@ -188,6 +197,7 @@ public class DataSource {
         Hill hill = new Hill(hillName, yearOfConstruction, lastReconstruction, reconstructions, plasticMatting, venue);
         session.save(hill);
         session.getTransaction().commit();
+        session.close();
 
     }
 
@@ -196,6 +206,7 @@ public class DataSource {
         session.beginTransaction();
         List<TypeOfHill> typeOfHillList = session.createQuery("FROM TypeOfHill").getResultList();
         session.getTransaction().commit();
+        session.close();
 
         return FXCollections.observableArrayList(typeOfHillList);
     }
@@ -209,6 +220,7 @@ public class DataSource {
                 kPoint, hillSize, versionRecord, hill, typeOfHill);
         session.save(hillVersion);
         session.getTransaction().commit();
+        session.close();
     }
 
     public ObservableList<Person> getPeople() {
@@ -217,7 +229,25 @@ public class DataSource {
         session.beginTransaction();
         List<Person> personList = session.createQuery("FROM Person").getResultList();
         session.getTransaction().commit();
+        session.close();
         people.addAll(personList);
+        people.sort(Person::compareTo);
         return people;
+    }
+
+    public void addPerson(String firstName, String lastName, LocalDate birthday, Country country, City city) {
+        Session session = factory.getCurrentSession();
+        session.beginTransaction();
+        Person person;
+
+        if (city != null)
+            person = new Person(firstName, lastName, birthday, country, city);
+        else
+            person = new Person(firstName, lastName, birthday, country);
+
+        session.save(person);
+        session.getTransaction().commit();
+        session.close();
+
     }
 }

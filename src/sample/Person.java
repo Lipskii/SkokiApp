@@ -1,11 +1,14 @@
 package sample;
 
+import org.hibernate.annotations.JoinColumnOrFormula;
+
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "person")
-public class Person {
+public class Person implements Comparable<Person> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +22,11 @@ public class Person {
     private String lastName;
 
     @Column(name = "birthday")
-    private Date birthday;
+    private LocalDate birthday;
+
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "fkcity")
+    private City city;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "fkcountry")
@@ -28,11 +35,20 @@ public class Person {
     public Person() {
     }
 
-    public Person(String firstName, String lastName, Date birthday, Country country) {
+    public Person(String firstName, String lastName, LocalDate birthday, Country country) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
         this.country = country;
+    }
+
+    public Person(String firstName, String lastName, LocalDate birthday, Country country, City city) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthday = birthday;
+        this.country = country;
+        this.city = city;
+
     }
 
     public int getIdPerson() {
@@ -59,11 +75,11 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public Date getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 
@@ -77,12 +93,14 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "idPerson=" + idPerson +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", birthday=" + birthday +
-                ", country=" + country +
-                '}';
+        return firstName + " " + lastName + " (" + country + ") ";
+    }
+
+    @Override
+    public int compareTo(Person person) {
+        if (!this.lastName.toLowerCase().equals(person.lastName.toLowerCase()))
+            return this.lastName.toLowerCase().compareTo(person.lastName.toLowerCase());
+        else
+            return this.firstName.toLowerCase().compareTo(person.firstName.toLowerCase());
     }
 }
