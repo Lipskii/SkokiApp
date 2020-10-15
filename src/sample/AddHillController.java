@@ -3,8 +3,10 @@ package sample;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-//TODO show only countries that have venues
 //TODO fix refreshing after adding a hill
+//TODO show only hillName
+//TODO fix distance between radio buttons
+//TODO select only cities with venues
 public class AddHillController {
 
     private DataSource dataSource;
@@ -41,7 +43,60 @@ public class AddHillController {
         plasticMattingRadioButtonNo.setToggleGroup(group);
         plasticMattingRadioButtonYes.setToggleGroup(group);
 
-        refresh();
+        addHillButton.setDisable(true);
+
+        countryComboBox.setItems(dataSource.getCountryWithVenuesList());
+        countryComboBox.getSelectionModel().select(0);
+        cityComboBox.setItems(dataSource.getCityByCountry(countryComboBox.getValue()));
+        cityComboBox.getSelectionModel().select(0);
+        venueComboBox.setItems(dataSource.getVenueByCity(cityComboBox.getValue()));
+        venueComboBox.getSelectionModel().select(0);
+
+        countryComboBox.valueProperty().addListener((observableValue, country, t1) -> {
+            cityComboBox.setItems(dataSource.getCityByCountry(t1));
+            cityComboBox.getSelectionModel().select(0);
+        });
+
+        cityComboBox.valueProperty().addListener((observableValue, city, t1) -> {
+            venueComboBox.setItems(dataSource.getVenueByCity(t1));
+            venueComboBox.getSelectionModel().select(0);
+        });
+
+        venueComboBox.valueProperty().addListener((observableValue, venue, t1) -> {
+            hillListView.setItems(dataSource.getHillByVenue(t1));
+            addHillButton.setDisable(hillNameTextField.getText().isEmpty()
+                    || yearOfConstructionTextField.getText().isEmpty()
+                    || lastReconstructionTextField.getText().isEmpty()
+                    || venueComboBox.getValue() == null);
+        });
+
+        hillNameTextField.textProperty().addListener(observable -> addHillButton.setDisable(hillNameTextField.getText().isEmpty()
+                || yearOfConstructionTextField.getText().isEmpty()
+                || lastReconstructionTextField.getText().isEmpty()
+                || venueComboBox.getValue() == null));
+
+        yearOfConstructionTextField.textProperty().addListener(observable -> addHillButton.setDisable(hillNameTextField.getText().isEmpty()
+                || yearOfConstructionTextField.getText().isEmpty()
+                || lastReconstructionTextField.getText().isEmpty()
+                || venueComboBox.getValue() == null));
+
+        lastReconstructionTextField.textProperty().addListener(observable -> addHillButton.setDisable(hillNameTextField.getText().isEmpty()
+                || yearOfConstructionTextField.getText().isEmpty()
+                || lastReconstructionTextField.getText().isEmpty()
+                || venueComboBox.getValue() == null));
+
+
+        yearOfConstructionTextField.textProperty().addListener((observableValue, s, t1) -> {
+            if (!t1.matches("\\d*")) {
+                yearOfConstructionTextField.setText(t1.replaceAll("[^\\d]", ""));
+            }
+        });
+
+        lastReconstructionTextField.textProperty().addListener(((observableValue, s, t1) -> {
+            if (!t1.matches("\\d*")) {
+                lastReconstructionTextField.setText(t1.replaceAll("[^\\d]", ""));
+            }
+        }));
 
     }
 
@@ -64,7 +119,7 @@ public class AddHillController {
             yearOfConstructionTextField.clear();
             lastReconstructionTextField.clear();
             reconstructionsTextField.clear();
-            refresh();
+
 
         } else {
             mandatoryFieldLabel.setVisible(true);
@@ -72,28 +127,4 @@ public class AddHillController {
 
     }
 
-    public void refresh() {
-
-        countryComboBox.setItems(dataSource.getCountryList());
-        countryComboBox.valueProperty().addListener((observableValue, country, t1) -> cityComboBox.setItems(dataSource.getCityByCountry(t1)));
-
-
-        cityComboBox.valueProperty().addListener((observableValue, city, t1) -> venueComboBox.setItems(dataSource.getVenueByCity(t1)));
-
-
-        venueComboBox.valueProperty().addListener((observableValue, venue, t1) -> hillListView.setItems(dataSource.getHillByVenue(t1)));
-
-
-        yearOfConstructionTextField.textProperty().addListener((observableValue, s, t1) -> {
-            if (!t1.matches("\\d*")) {
-                yearOfConstructionTextField.setText(t1.replaceAll("[^\\d]", ""));
-            }
-        });
-
-        lastReconstructionTextField.textProperty().addListener(((observableValue, s, t1) -> {
-            if (!t1.matches("\\d*")) {
-                lastReconstructionTextField.setText(t1.replaceAll("[^\\d]", ""));
-            }
-        }));
-    }
 }

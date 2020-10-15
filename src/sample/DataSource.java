@@ -13,9 +13,8 @@ import java.util.*;
 public class DataSource {
 
     private final SessionFactory factory;
-    //Session session;
+
     ObservableList<Region> regionObservableList;
-    ObservableList<Country> countryObservableList;
 
     public DataSource() {
         factory = new Configuration().configure()
@@ -82,14 +81,32 @@ public class DataSource {
 
     public ObservableList<Country> getCountryList() {
         Session session = factory.getCurrentSession();
-        countryObservableList = FXCollections.observableArrayList();
         session.beginTransaction();
         List<Country> countries = session.createQuery("FROM Country").getResultList();
         session.getTransaction().commit();
         session.close();
-        countryObservableList.addAll(countries);
+        return FXCollections.observableList(countries);
+    }
+
+    //TEMPORARY SOLUTION, FIX LATER WITH HIBERNATE (MultipleBagFetchException)!!!!
+    public ObservableList<Country> getCountryWithVenuesList() {
+        Session session = factory.getCurrentSession();
+        session.beginTransaction();
+        Set<Country> countries = new HashSet<>();
+        List<Venue> venues = session.createQuery("FROM Venue v JOIN FETCH v.city.region.country Country").getResultList();
+
+        for (Venue venue : venues) {
+            City city = venue.getCity();
+            Region region = city.getRegion();
+            Country country = region.getCountry();
+            countries.add(country);
+        }
+
+        session.getTransaction().commit();
         session.close();
-        return countryObservableList;
+        List<Country> countryList = new ArrayList<>(countries);
+        countryList.sort(Country::compareTo);
+        return FXCollections.observableList(countryList);
     }
 
     public ObservableList<Region> getRegionsByCountry(Country country) {
@@ -125,6 +142,7 @@ public class DataSource {
         } else {
             venues = Collections.emptyList();
         }
+
 
         ObservableList<Venue> venueObservableList = FXCollections.observableArrayList(venues);
         venueObservableList.sort(Venue::compareTo);

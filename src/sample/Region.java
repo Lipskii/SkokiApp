@@ -1,5 +1,8 @@
 package sample;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +24,7 @@ public class Region implements Comparable<Region> {
     private Country country;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "region", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    //@Fetch(value = FetchMode.SUBSELECT)
     private List<City> cities;
 
 

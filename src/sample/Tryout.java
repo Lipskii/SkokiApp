@@ -4,8 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Tryout {
     public static void main(String[] args) {
@@ -46,10 +45,23 @@ public class Tryout {
 //            List<Country> countries1 = dataSource.getCountryList();
 //            dataSource.getCityByCountry(countries1.get(176));
 
-            Country country1 = session.get(Country.class, 177);
-            System.out.println(country1);
-            session.getTransaction().commit();
-            List<Hill> hills = dataSource.getHillByCountry(country1);
+            //"FROM Hill h JOIN FETCH h.venue.city.region.country Country " +
+            //                "WHERE h.venue.city.region.country.id = " + country.getIdCountry()).getResultList()
+
+            Set<Country> countries = new HashSet<>();
+
+            List<Venue> venues = session.createQuery("FROM Venue v JOIN FETCH v.city.region.country Country").getResultList();
+
+            for (Venue venue : venues) {
+                City city = venue.getCity();
+                Region region = city.getRegion();
+                Country country = region.getCountry();
+                countries.add(country);
+            }
+
+            for (Country country : countries) {
+                System.out.println(country);
+            }
 
 
         }
