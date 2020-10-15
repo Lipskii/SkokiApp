@@ -60,14 +60,13 @@ public class DataSource {
         return city;
     }
 
-    public Venue addVenue(String venueName, int yearOfOpening, int capacity, City city) {
+    public void addVenue(String venueName, int yearOfOpening, int capacity, City city) {
         Session session = factory.getCurrentSession();
         session.beginTransaction();
         Venue venue = new Venue(venueName, yearOfOpening, capacity, city);
         session.save(venue);
         session.getTransaction().commit();
         session.close();
-        return venue;
     }
 
     public ObservableList<Region> getRegionList() {

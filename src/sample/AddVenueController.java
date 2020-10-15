@@ -23,8 +23,6 @@ public class AddVenueController {
     @FXML
     ComboBox<Region> regionComboBox;
     @FXML
-    Label venueAddedLabel;
-    @FXML
     ListView<Venue> venuesListView;
     @FXML
     TextField capacityTextField;
@@ -39,49 +37,27 @@ public class AddVenueController {
     public void initialize() {
         dataSource = new DataSource();
 
-        refresh();
-    }
+        addCityButton.setDisable(true);
+        addVenueButton.setDisable(true);
 
-    @FXML
-    public void handleAddCityButton() {
-        if ((regionComboBox.getValue() != null) && !cityNameTextField.getText().isEmpty()) {
-            int index = countryComboBox.getSelectionModel().getSelectedIndex();
-            City city = dataSource.addCityReturnCity(regionComboBox.getValue(), cityNameTextField.getText());
-            countryComboBox.setItems(dataSource.getCountryList());
-            countryComboBox.getSelectionModel().select(index);
-            cityComboBox.getSelectionModel().select(0);
-            cityNameTextField.clear();
-        }
-    }
+        cityNameTextField.textProperty().addListener((observableValue, s, t1) ->
+                addCityButton.setDisable((cityNameTextField.getText().isEmpty()) && regionComboBox.getValue() != null));
 
-    @FXML
-    public void handleAddVenueButton() {
-        int capacity;
-        if (capacityTextField.getText().isEmpty()) {
-            capacity = 0;
-        } else {
-            capacity = parseInt(capacityTextField.getText());
-        }
-        if (!venueNameTextField.getText().isEmpty() && !yearOfOpeningTextField.getText().isEmpty() && (cityComboBox.getValue() != null)) {
-            Venue venue = dataSource.addVenue(venueNameTextField.getText(), parseInt(yearOfOpeningTextField.getText()),
-                    capacity, cityComboBox.getValue());
-            venueAddedLabel.setText("Venue: " + venue.toString() + " added.");
-            int index = countryComboBox.getSelectionModel().getSelectedIndex();
-            countryComboBox.getSelectionModel().select(index);
-            venuesListView.setItems(dataSource.getVenueByCity(cityComboBox.getValue()));
-        } else {
-            venueAddedLabel.setText("Fields with * cannot be empty!");
-        }
-    }
-
-    public void refresh() {
         countryComboBox.setItems(dataSource.getCountryList());
+        countryComboBox.getSelectionModel().select(0);
+
         countryComboBox.valueProperty().addListener((observableValue, country, t1) -> {
-            ObservableList<City> cities = dataSource.getCityByCountry(t1);
-            ObservableList<Region> regions = dataSource.getRegionsByCountry(t1);
-            cityComboBox.setItems(cities);
-            regionComboBox.setItems(regions);
+            cityComboBox.setItems(dataSource.getCityByCountry(t1));
+            cityComboBox.getSelectionModel().select(0);
+            regionComboBox.setItems(dataSource.getRegionsByCountry(t1));
+            regionComboBox.getSelectionModel().select(0);
         });
+
+        venueNameTextField.textProperty().addListener(observable -> addVenueButton.setDisable(venueNameTextField.getText().isEmpty() || yearOfOpeningTextField.getText().isEmpty() || (cityComboBox.getValue() == null)));
+
+        yearOfOpeningTextField.textProperty().addListener(observable -> addVenueButton.setDisable(venueNameTextField.getText().isEmpty() || yearOfOpeningTextField.getText().isEmpty() || (cityComboBox.getValue() == null)));
+
+        cityComboBox.valueProperty().addListener(observable -> addVenueButton.setDisable(venueNameTextField.getText().isEmpty() || yearOfOpeningTextField.getText().isEmpty() || (cityComboBox.getValue() == null)));
 
         //to prevent user from typing not digits; left it as a not-lambda on purpose
         capacityTextField.textProperty().addListener(new ChangeListener<>() {
@@ -108,5 +84,48 @@ public class AddVenueController {
                 yearOfOpeningTextField.setText(t1.replaceAll("[^\\d]", ""));
             }
         });
+
     }
+
+    @FXML
+    public void handleAddCityButton() {
+        if ((regionComboBox.getValue() != null) && !cityNameTextField.getText().isEmpty()) {
+            int index = countryComboBox.getSelectionModel().getSelectedIndex();
+            dataSource.addCity(regionComboBox.getValue(), cityNameTextField.getText());
+            countryComboBox.setItems(dataSource.getCountryList());
+            countryComboBox.getSelectionModel().select(index);
+            cityComboBox.getSelectionModel().select(0);
+            cityNameTextField.clear();
+        }
+    }
+
+    @FXML
+    public void handleAddVenueButton() {
+        int capacity;
+        if (capacityTextField.getText().isEmpty()) {
+            capacity = 0;
+        } else {
+            capacity = parseInt(capacityTextField.getText());
+        }
+
+
+        dataSource.addVenue(venueNameTextField.getText(), parseInt(yearOfOpeningTextField.getText()),
+                capacity, cityComboBox.getValue());
+
+        int indexCountry = countryComboBox.getSelectionModel().getSelectedIndex();
+        int indexCity = cityComboBox.getSelectionModel().getSelectedIndex();
+
+        countryComboBox.setItems(dataSource.getCountryList());
+        countryComboBox.getSelectionModel().select(indexCountry);
+
+        cityComboBox.getSelectionModel().select(indexCity);
+
+        venuesListView.setItems(dataSource.getVenueByCity(cityComboBox.getValue()));
+        venueNameTextField.clear();
+        yearOfOpeningTextField.clear();
+        capacityTextField.clear();
+
+
+    }
+
 }

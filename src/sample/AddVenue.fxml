@@ -68,7 +68,6 @@
             <TextField fx:id="capacityTextField" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
             <Button fx:id="addVenueButton" mnemonicParsing="false" onAction="#handleAddVenueButton" text="Add Venue"
                     GridPane.columnIndex="1" GridPane.rowIndex="6"/>
-            <Label fx:id="venueAddedLabel" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
             <ListView fx:id="venuesListView" prefHeight="48.0" prefWidth="213.0" GridPane.columnIndex="1"
                       GridPane.rowIndex="8"/>
             <Label text="Venues in the City:" GridPane.halignment="RIGHT" GridPane.rowIndex="8"
