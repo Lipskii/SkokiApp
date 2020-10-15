@@ -8,7 +8,8 @@ import javafx.scene.control.*;
 import java.math.BigDecimal;
 import java.util.*;
 
-
+//TODO show only countries that have hills
+//TODO fix refreshing
 public class AddHillVersionController {
 
     DataSource dataSource;

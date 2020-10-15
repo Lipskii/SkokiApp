@@ -35,45 +35,43 @@
                 <ColumnConstraints minWidth="250.0" prefWidth="250.0"/>
                 <ColumnConstraints minWidth="250.0" prefWidth="250.0"/>
             </columnConstraints>
-            <children>
-                <Label text="Firstname:" GridPane.rowIndex="2"/>
-                <Label text="Lastname:" GridPane.rowIndex="3"/>
-                <ListView fx:id="personListView" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1"
-                          GridPane.rowIndex="1"/>
-                <Label text="Birthday:" GridPane.rowIndex="4"/>
-                <Label text="Country:" GridPane.rowIndex="5"/>
-                <Label text="City:" GridPane.rowIndex="6"/>
-                <Label text="Ski Jumper?" GridPane.rowIndex="7"/>
-                <TextField fx:id="searchTextField" GridPane.columnIndex="1"/>
-                <Label text="Search:"/>
-                <TextField fx:id="firstNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-                <TextField fx:id="lastNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-                <ComboBox fx:id="countryComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
-                <ComboBox fx:id="cityComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
-                <RadioButton fx:id="skiJumperYesButton" mnemonicParsing="false" text="Yes" GridPane.columnIndex="1"
-                             GridPane.rowIndex="7"/>
-                <Button fx:id="addPersonButton" mnemonicParsing="false" onAction="#handleAddPersonButton"
-                        text="Add person" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7"/>
-                <RadioButton fx:id="skiJumperNoButton" mnemonicParsing="false" text="No" GridPane.columnIndex="1"
-                             GridPane.halignment="CENTER" GridPane.rowIndex="7"/>
-                <DatePicker fx:id="birthdayDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
-                <Label fx:id="firstNameNotEmptyLabel" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
-                <Label fx:id="lastNameNotEmptyLabel" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
-                <Label fx:id="birthdayPickerLabel" text="Date format: &quot;yyyy-mm-dd&quot;" GridPane.columnIndex="2"
-                       GridPane.rowIndex="4"/>
-                <Label text="Or Add City:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="6"/>
-                <ComboBox fx:id="regionComboBox" prefWidth="150.0" promptText="Region" GridPane.columnIndex="2"
-                          GridPane.halignment="RIGHT" GridPane.rowIndex="6"/>
-                <TextField fx:id="cityTextField" maxWidth="125.0" prefWidth="125.0" promptText="City name"
-                           GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="6"/>
-                <Button fx:id="addCityButton" mnemonicParsing="false" onAction="#handleAddCityButton" text="Add city"
-                        GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="6"/>
-                <Label fx:id="cityAddedLabel" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="7"
-                       GridPane.valignment="TOP"/>
-                <Label text="Is Active?" GridPane.rowIndex="8"/>
-                <CheckBox fx:id="isActiveCheckBox" mnemonicParsing="false" GridPane.columnIndex="1"
-                          GridPane.rowIndex="8"/>
-            </children>
+            <Label text="Firstname:" GridPane.rowIndex="2"/>
+            <Label text="Lastname:" GridPane.rowIndex="3"/>
+            <ListView fx:id="personListView" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1"
+                      GridPane.rowIndex="1"/>
+            <Label text="Birthday:" GridPane.rowIndex="4"/>
+            <Label text="Country:" GridPane.rowIndex="5"/>
+            <Label text="City:" GridPane.rowIndex="6"/>
+            <Label text="Ski Jumper?" GridPane.rowIndex="7"/>
+            <TextField fx:id="searchTextField" GridPane.columnIndex="1"/>
+            <Label text="Search:"/>
+            <TextField fx:id="firstNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+            <TextField fx:id="lastNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+            <ComboBox fx:id="countryComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+            <ComboBox fx:id="cityComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+            <RadioButton fx:id="skiJumperYesButton" mnemonicParsing="false" text="Yes" GridPane.columnIndex="1"
+                         GridPane.rowIndex="7"/>
+            <Button fx:id="addPersonButton" mnemonicParsing="false" onAction="#handleAddPersonButton"
+                    text="Add person" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7"/>
+            <RadioButton fx:id="skiJumperNoButton" mnemonicParsing="false" text="No" GridPane.columnIndex="1"
+                         GridPane.halignment="CENTER" GridPane.rowIndex="7"/>
+            <DatePicker fx:id="birthdayDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+            <Label fx:id="firstNameNotEmptyLabel" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+            <Label fx:id="lastNameNotEmptyLabel" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+            <Label fx:id="birthdayPickerLabel" text="Date format: &quot;yyyy-mm-dd&quot;" GridPane.columnIndex="2"
+                   GridPane.rowIndex="4"/>
+            <Label text="Or Add City:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="6"/>
+            <ComboBox fx:id="regionComboBox" prefWidth="150.0" promptText="Region" GridPane.columnIndex="2"
+                      GridPane.halignment="RIGHT" GridPane.rowIndex="6"/>
+            <TextField fx:id="cityTextField" maxWidth="125.0" prefWidth="125.0" promptText="City name"
+                       GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="6"/>
+            <Button fx:id="addCityButton" mnemonicParsing="false" onAction="#handleAddCityButton" text="Add city"
+                    GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="6"/>
+            <Label fx:id="cityAddedLabel" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="7"
+                   GridPane.valignment="TOP"/>
+            <Label text="Is Active?" GridPane.rowIndex="8"/>
+            <CheckBox fx:id="isActiveCheckBox" mnemonicParsing="false" GridPane.columnIndex="1"
+                      GridPane.rowIndex="8"/>
         </GridPane>
     </content>
 

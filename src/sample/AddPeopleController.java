@@ -63,8 +63,12 @@ public class AddPeopleController {
 
         skiJumperYesButton.selectedProperty().addListener((observableValue, aBoolean, t1) -> isActiveCheckBox.setDisable(!skiJumperYesButton.isSelected()));
         birthdayDatePicker.getEditor().setText("2000-12-31");
-        //TODO(Add listener to prevent user from typing incorrect format)
 
+        birthdayDatePicker.getEditor().textProperty().addListener((observableValue, s, t1) -> {
+            if (!t1.matches("\\d*")) {
+                birthdayDatePicker.getEditor().setText(birthdayDatePicker.getEditor().getText().replaceAll("[^\\d-]", ""));
+            }
+        });
 
         personListView.setItems(dataSource.getPeople());
 
@@ -86,6 +90,7 @@ public class AddPeopleController {
 
     @FXML
     public void handleAddPersonButton() {
+        boolean dateFlag = false;
         if (firstNameTextField.getText().isEmpty())
             firstNameNotEmptyLabel.setText("Cannot be empty!");
         else
@@ -100,6 +105,7 @@ public class AddPeopleController {
         try {
             birthdayDatePicker.setValue(LocalDate.parse(birthdayDatePicker.getEditor().getText()));
             birthdayPickerLabel.setText("Date format: \"yyyy-mm-dd\"");
+            dateFlag = true;
 
         } catch (DateTimeParseException e) {
             System.out.println(e.getErrorIndex());
@@ -109,11 +115,12 @@ public class AddPeopleController {
         }
 
 
-        if (!lastNameTextField.getText().isEmpty() && !firstNameTextField.getText().isEmpty()) {
+        if (!lastNameTextField.getText().isEmpty() && !firstNameTextField.getText().isEmpty() && dateFlag) {
             Person person = dataSource.addPerson(firstNameTextField.getText(), lastNameTextField.getText(),
                     birthdayDatePicker.getValue(), countryComboBox.getValue(), cityComboBox.getValue());
 
             personListView.setItems(dataSource.getPeople());
+
             if (person != null && skiJumperYesButton.isSelected()) {
                 dataSource.addSkiJumper(person, isActiveCheckBox.isSelected());
             }

@@ -93,7 +93,7 @@ public class Person implements Comparable<Person> {
 
     @Override
     public String toString() {
-        return firstName + " " + lastName + " (" + country + ") ";
+        return firstName + " " + lastName.toUpperCase() + " (" + country + ") ";
     }
 
     @Override

@@ -35,6 +35,7 @@ public class AddVenueController {
     @FXML
     TextField yearOfOpeningTextField;
 
+    //TODO fix refreshing
     public void initialize() {
         dataSource = new DataSource();
 
@@ -44,8 +45,12 @@ public class AddVenueController {
     @FXML
     public void handleAddCityButton() {
         if ((regionComboBox.getValue() != null) && !cityNameTextField.getText().isEmpty()) {
-            dataSource.addCity(regionComboBox.getValue(), cityNameTextField.getText());
-            refresh();
+            int index = countryComboBox.getSelectionModel().getSelectedIndex();
+            City city = dataSource.addCityReturnCity(regionComboBox.getValue(), cityNameTextField.getText());
+            countryComboBox.setItems(dataSource.getCountryList());
+            countryComboBox.getSelectionModel().select(index);
+            cityComboBox.getSelectionModel().select(0);
+            cityNameTextField.clear();
         }
     }
 
@@ -61,6 +66,8 @@ public class AddVenueController {
             Venue venue = dataSource.addVenue(venueNameTextField.getText(), parseInt(yearOfOpeningTextField.getText()),
                     capacity, cityComboBox.getValue());
             venueAddedLabel.setText("Venue: " + venue.toString() + " added.");
+            int index = countryComboBox.getSelectionModel().getSelectedIndex();
+            countryComboBox.getSelectionModel().select(index);
             venuesListView.setItems(dataSource.getVenueByCity(cityComboBox.getValue()));
         } else {
             venueAddedLabel.setText("Fields with * cannot be empty!");

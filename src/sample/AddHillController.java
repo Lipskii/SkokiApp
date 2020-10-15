@@ -3,7 +3,8 @@ package sample;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-
+//TODO show only countries that have venues
+//TODO fix refreshing after adding a hill
 public class AddHillController {
 
     private DataSource dataSource;
