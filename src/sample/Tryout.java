@@ -48,20 +48,22 @@ public class Tryout {
             //"FROM Hill h JOIN FETCH h.venue.city.region.country Country " +
             //                "WHERE h.venue.city.region.country.id = " + country.getIdCountry()).getResultList()
 
-            Set<Country> countries = new HashSet<>();
+//            Set<Country> countries = new HashSet<>();
+//
+//            List<Venue> venues = session.createQuery("FROM Venue v JOIN FETCH v.city.region.country Country").getResultList();
+//
+//            for (Venue venue : venues) {
+//                City city = venue.getCity();
+//                Region region = city.getRegion();
+//                Country country = region.getCountry();
+//                countries.add(country);
+//            }
+//
+//            for (Country country : countries) {
+//                System.out.println(country);
+//            }
 
-            List<Venue> venues = session.createQuery("FROM Venue v JOIN FETCH v.city.region.country Country").getResultList();
-
-            for (Venue venue : venues) {
-                City city = venue.getCity();
-                Region region = city.getRegion();
-                Country country = region.getCountry();
-                countries.add(country);
-            }
-
-            for (Country country : countries) {
-                System.out.println(country);
-            }
+            dataSource.getCountryWithHillsList();
 
 
         }

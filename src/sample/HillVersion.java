@@ -186,9 +186,9 @@ public class HillVersion implements Comparable<HillVersion> {
         }
 
         if (lastYear == 0) {
-            return firstYear + "- now" + " K: " + kPoint + " HS: " + hs;
+            return firstYear + " - now" + " K: " + kPoint + " HS: " + hs;
         } else
-            return firstYear + "-" + lastYear + " K: " + kPoint + " HS: " + hs;
+            return firstYear + " - " + lastYear + " K: " + kPoint + " HS: " + hs;
 
     }
 }

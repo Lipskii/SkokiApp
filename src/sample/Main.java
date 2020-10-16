@@ -9,7 +9,7 @@ import javafx.stage.StageStyle;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
 
-
+//TODO make sorting alphabetically include foreign signs (like polish signs)
 public class Main extends Application {
 
     @Override

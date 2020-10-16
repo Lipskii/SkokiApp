@@ -1,26 +1,17 @@
 package sample;
 
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 
 import java.math.BigDecimal;
-import java.util.*;
 
-//TODO show only countries that have hills
-//TODO fix refreshing
 public class AddHillVersionController {
 
     DataSource dataSource;
-    Hill selectedHill;
-    private final List<Node> nodeList = new ArrayList<>();
 
 
     @FXML
     Button addButton;
-    @FXML
-    Button selectButton;
     @FXML
     ComboBox<Country> countryComboBox;
     @FXML
@@ -79,35 +70,28 @@ public class AddHillVersionController {
     public void initialize() {
         dataSource = new DataSource();
 
-        nodeList.add(typeOfHillComboBox);
-        nodeList.add(typeOfHillLabel);
-        nodeList.add(firstYearOfThisVersionLabel);
-        nodeList.add(firstYearTextField);
-        nodeList.add(lastYearOfThisVersionLabel);
-        nodeList.add(lastYearTextField);
-        nodeList.add(inrunAngleLabel);
-        nodeList.add(inrunAngleTextField);
-        nodeList.add(inrunLengthLabel);
-        nodeList.add(inrunLengthTextField);
-        nodeList.add(takeOffAngleLabel);
-        nodeList.add(takeOffAngleTextField);
-        nodeList.add(takeOfHeightLabel);
-        nodeList.add(takeOffHeightTextField);
-        nodeList.add(takeOffLengthLabel);
-        nodeList.add(takeOffLengthTextField);
-        nodeList.add(kPointLabel);
-        nodeList.add(kPointTextField);
-        nodeList.add(hillSizeLabel);
-        nodeList.add(hillSizeTextField);
-        nodeList.add(hillVersionRecordLabel);
-        nodeList.add(hillVersionRecordTextField);
-        nodeList.add(addButton);
-        nodeList.add(hillVersionListView);
-        nodeList.add(existingVersionsLabel);
+        addButton.setDisable(true);
 
         typeOfHillComboBox.setItems(dataSource.getTypeOfHills());
         typeOfHillComboBox.getSelectionModel().select(0);
 
+
+        countryComboBox.setItems(dataSource.getCountryWithHillsList());
+        countryComboBox.getSelectionModel().select(0);
+        hillListView.setItems(dataSource.getHillByCountry(countryComboBox.getValue()));
+        hillListView.getSelectionModel().select(0);
+        hillVersionListView.setItems(dataSource.getHillVersionByHill(hillListView.getSelectionModel().getSelectedItem()));
+        selectionLabel.setText("You've selected: " + hillListView.getSelectionModel().getSelectedItem());
+
+        countryComboBox.valueProperty().addListener(((observableValue, country, t1) -> {
+            hillListView.setItems(dataSource.getHillByCountry(t1));
+            hillListView.getSelectionModel().select(0);
+        }));
+
+        hillListView.getSelectionModel().selectedItemProperty().addListener((observableValue, hill, t1) -> {
+            hillVersionListView.setItems(dataSource.getHillVersionByHill(hillListView.getSelectionModel().getSelectedItem()));
+            selectionLabel.setText("You've selected: " + hillListView.getSelectionModel().getSelectedItem());
+        });
 
         //fix later to prevent user from typing two dots
         firstYearTextField.textProperty().addListener((observableValue, s, t1) -> {
@@ -124,79 +108,55 @@ public class AddHillVersionController {
 
         inrunLengthTextField.textProperty().addListener((observableValue, s, t1) -> {
             if (!t1.matches("\\d*\\.")) {
-                inrunLengthTextField.setText(t1.replaceAll("[^\\d\\.]", ""));
+                inrunLengthTextField.setText(t1.replaceAll("[^\\d.]", ""));
             }
         });
 
         inrunAngleTextField.textProperty().addListener((observableValue, s, t1) -> {
             if (!t1.matches("\\d*\\.")) {
-                inrunAngleTextField.setText(t1.replaceAll("[^\\d\\.]]", ""));
+                inrunAngleTextField.setText(t1.replaceAll("[^\\d.]]", ""));
             }
         });
 
         takeOffLengthTextField.textProperty().addListener((observableValue, s, t1) -> {
             if (!t1.matches("\\d*\\.")) {
-                takeOffLengthTextField.setText(t1.replaceAll("[^\\d\\.]", ""));
+                takeOffLengthTextField.setText(t1.replaceAll("[^\\d.]", ""));
             }
         });
 
         takeOffAngleTextField.textProperty().addListener((observableValue, s, t1) -> {
             if (!t1.matches("\\d*\\.")) {
-                takeOffAngleTextField.setText(t1.replaceAll("[^\\d\\.]", ""));
+                takeOffAngleTextField.setText(t1.replaceAll("[^\\d.]", ""));
             }
         });
 
         takeOffHeightTextField.textProperty().addListener((observableValue, s, t1) -> {
             if (!t1.matches("\\d*\\.")) {
-                takeOffHeightTextField.setText(t1.replaceAll("[^\\d\\.]", ""));
+                takeOffHeightTextField.setText(t1.replaceAll("[^\\d.]", ""));
             }
         });
 
         kPointTextField.textProperty().addListener((observableValue, s, t1) -> {
             if (!t1.matches("\\d*\\.")) {
-                kPointTextField.setText(t1.replaceAll("[^\\d\\.]", ""));
+                kPointTextField.setText(t1.replaceAll("[^\\d.]", ""));
             }
+            addButton.setDisable(kPointTextField.getText().isEmpty());
         });
 
         hillSizeTextField.textProperty().addListener((observableValue, s, t1) -> {
             if (!t1.matches("\\d*\\.")) {
-                hillSizeTextField.setText(t1.replaceAll("[^\\d\\.]", ""));
+                hillSizeTextField.setText(t1.replaceAll("[^\\d.]", ""));
             }
         });
 
         hillVersionRecordTextField.textProperty().addListener((observableValue, s, t1) -> {
             if (!t1.matches("\\d*\\.")) {
-                hillVersionRecordTextField.setText(t1.replaceAll("[^\\d\\.]", ""));
+                hillVersionRecordTextField.setText(t1.replaceAll("[^\\d.]", ""));
             }
         });
 
-        countryComboBox.setItems(dataSource.getCountryList());
-        countryComboBox.getSelectionModel().select(0);
-
-        countryComboBox.valueProperty().addListener(((observableValue, country, t1) -> {
-            hillListView.setItems(dataSource.getHillByCountry(t1));
-            visibility(false);
-        }));
-
-        hillListView.getSelectionModel().selectedItemProperty().addListener((observableValue, hill, t1) -> {
-            selectedHill = t1;
-            hillVersionListView.setItems(dataSource.getHillVersionByHill(selectedHill));
-        });
-
-
     }
 
-
-    @FXML
-    public void handleSelectButton() {
-        if (selectedHill != null) {
-            selectionLabel.setText("You've selected " + selectedHill);
-            visibility(true);
-        } else {
-            selectionLabel.setText("Choose a hill to proceed");
-            visibility(false);
-        }
-    }
 
     @FXML
     public void handleAddButton() {
@@ -232,16 +192,20 @@ public class AddHillVersionController {
 
 
         dataSource.addHillVersion(firstYear, lastYear, inrunLength, inrunAngle, takeOffLength, takeOffAngle,
-                takeOffHeight, kPoint, hillSize, versionRecord, typeOfHillComboBox.getValue(), selectedHill);
+                takeOffHeight, kPoint, hillSize, versionRecord, typeOfHillComboBox.getValue(), hillListView.getSelectionModel().getSelectedItem());
 
-        visibility(false);
+        int countryIndex = countryComboBox.getSelectionModel().getSelectedIndex();
+        int hillIndex = hillListView.getSelectionModel().getSelectedIndex();
+
+        countryComboBox.setItems(dataSource.getCountryWithHillsList());
+        countryComboBox.getSelectionModel().select(countryIndex);
+        hillListView.setItems(dataSource.getHillByCountry(countryComboBox.getValue()));
+        hillListView.getSelectionModel().select(hillIndex);
+        hillVersionListView.setItems(dataSource.getHillVersionByHill(hillListView.getSelectionModel().getSelectedItem()));
+        hillVersionListView.setItems(dataSource.getHillVersionByHill(hillListView.getSelectionModel().getSelectedItem()));
 
     }
 
-    //temporary solution TODO(find better solution)
-    private void visibility(Boolean currentVisibility) {
-        for (Node node : nodeList) {
-            node.setVisible(currentVisibility);
-        }
-    }
+
+
 }

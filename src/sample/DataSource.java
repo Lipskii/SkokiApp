@@ -93,7 +93,7 @@ public class DataSource {
         Session session = factory.getCurrentSession();
         session.beginTransaction();
         Set<Country> countries = new HashSet<>();
-        List<Venue> venues = session.createQuery("FROM Venue v JOIN FETCH v.city.region.country Country").getResultList();
+        List<Venue> venues = session.createQuery("FROM Venue").getResultList();
 
         for (Venue venue : venues) {
             City city = venue.getCity();
@@ -108,6 +108,27 @@ public class DataSource {
         countryList.sort(Country::compareTo);
         return FXCollections.observableList(countryList);
     }
+
+    //TEMPORARY SOLUTION, FIX LATER WITH HIBERNATE (MultipleBagFetchException)!!!!
+    public ObservableList<Country> getCountryWithHillsList() {
+        Session session = factory.getCurrentSession();
+        session.beginTransaction();
+        Set<Country> countries = new HashSet<>();
+        List<Hill> hills = session.createQuery("FROM Hill").getResultList();
+        for (Hill hill : hills) {
+            Venue venue = hill.getVenue();
+            City city = venue.getCity();
+            Region region = city.getRegion();
+            Country country = region.getCountry();
+            countries.add(country);
+        }
+        session.getTransaction().commit();
+        session.close();
+        List<Country> countryList = new ArrayList<>(countries);
+        countryList.sort(Country::compareTo);
+        return FXCollections.observableList(countryList);
+    }
+
 
     public ObservableList<Region> getRegionsByCountry(Country country) {
         List<Region> regions;
