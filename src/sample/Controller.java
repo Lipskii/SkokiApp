@@ -78,7 +78,6 @@ public class Controller {
             return;
         }
         dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
-        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
 
         dialog.showAndWait();
     }
@@ -99,7 +98,6 @@ public class Controller {
             return;
         }
         dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
-        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
 
         dialog.showAndWait();
     }
@@ -141,7 +139,6 @@ public class Controller {
             return;
         }
         dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
-        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
 
         dialog.showAndWait();
 

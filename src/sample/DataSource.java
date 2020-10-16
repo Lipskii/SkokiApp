@@ -286,4 +286,12 @@ public class DataSource {
         session.getTransaction().commit();
         session.close();
     }
+
+    public ObservableList<City> getCityWithVenuesByCountry(Country country) {
+        ObservableList<City> citiesByCountry = getCityByCountry(country);
+
+        citiesByCountry.removeIf(city -> city.getVenues().isEmpty());
+
+        return citiesByCountry;
+    }
 }

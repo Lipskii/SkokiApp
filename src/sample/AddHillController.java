@@ -3,10 +3,7 @@ package sample;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-//TODO fix refreshing after adding a hill
-//TODO show only hillName
 //TODO fix distance between radio buttons
-//TODO select only cities with venues
 public class AddHillController {
 
     private DataSource dataSource;
@@ -47,13 +44,13 @@ public class AddHillController {
 
         countryComboBox.setItems(dataSource.getCountryWithVenuesList());
         countryComboBox.getSelectionModel().select(0);
-        cityComboBox.setItems(dataSource.getCityByCountry(countryComboBox.getValue()));
+        cityComboBox.setItems(dataSource.getCityWithVenuesByCountry(countryComboBox.getValue()));
         cityComboBox.getSelectionModel().select(0);
         venueComboBox.setItems(dataSource.getVenueByCity(cityComboBox.getValue()));
         venueComboBox.getSelectionModel().select(0);
 
         countryComboBox.valueProperty().addListener((observableValue, country, t1) -> {
-            cityComboBox.setItems(dataSource.getCityByCountry(t1));
+            cityComboBox.setItems(dataSource.getCityWithVenuesByCountry(t1));
             cityComboBox.getSelectionModel().select(0);
         });
 
@@ -66,24 +63,21 @@ public class AddHillController {
             hillListView.setItems(dataSource.getHillByVenue(t1));
             addHillButton.setDisable(hillNameTextField.getText().isEmpty()
                     || yearOfConstructionTextField.getText().isEmpty()
-                    || lastReconstructionTextField.getText().isEmpty()
-                    || venueComboBox.getValue() == null);
+                    || lastReconstructionTextField.getText().isEmpty());
         });
 
         hillNameTextField.textProperty().addListener(observable -> addHillButton.setDisable(hillNameTextField.getText().isEmpty()
                 || yearOfConstructionTextField.getText().isEmpty()
-                || lastReconstructionTextField.getText().isEmpty()
-                || venueComboBox.getValue() == null));
+                || lastReconstructionTextField.getText().isEmpty()));
 
         yearOfConstructionTextField.textProperty().addListener(observable -> addHillButton.setDisable(hillNameTextField.getText().isEmpty()
                 || yearOfConstructionTextField.getText().isEmpty()
-                || lastReconstructionTextField.getText().isEmpty()
-                || venueComboBox.getValue() == null));
+                || lastReconstructionTextField.getText().isEmpty()));
 
         lastReconstructionTextField.textProperty().addListener(observable -> addHillButton.setDisable(hillNameTextField.getText().isEmpty()
                 || yearOfConstructionTextField.getText().isEmpty()
                 || lastReconstructionTextField.getText().isEmpty()
-                || venueComboBox.getValue() == null));
+        ));
 
 
         yearOfConstructionTextField.textProperty().addListener((observableValue, s, t1) -> {
@@ -114,11 +108,18 @@ public class AddHillController {
                     plasticMattingRadioButtonYes.isSelected(),
                     venueComboBox.getValue());
 
-            hillListView.setItems(dataSource.getHillByVenue(venueComboBox.getValue()));
             hillNameTextField.clear();
             yearOfConstructionTextField.clear();
             lastReconstructionTextField.clear();
             reconstructionsTextField.clear();
+            int countryIndex = countryComboBox.getSelectionModel().getSelectedIndex();
+            int cityIndex = cityComboBox.getSelectionModel().getSelectedIndex();
+            int venueIndex = venueComboBox.getSelectionModel().getSelectedIndex();
+            countryComboBox.setItems(dataSource.getCountryWithVenuesList());
+            countryComboBox.getSelectionModel().select(countryIndex);
+            cityComboBox.getSelectionModel().select(cityIndex);
+            venueComboBox.getSelectionModel().select(venueIndex);
+            hillListView.setItems(dataSource.getHillByVenue(venueComboBox.getValue()));
 
 
         } else {
