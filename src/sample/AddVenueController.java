@@ -9,11 +9,14 @@ import javafx.scene.control.*;
 
 import static java.lang.Integer.parseInt;
 
+
 public class AddVenueController {
 
     private DataSource dataSource;
     @FXML
     Button addCityButton;
+    @FXML
+    Button addRegionButton;
     @FXML
     Button addVenueButton;
     @FXML
@@ -29,6 +32,8 @@ public class AddVenueController {
     @FXML
     TextField cityNameTextField;
     @FXML
+    TextField regionNameTextField;
+    @FXML
     TextField venueNameTextField;
     @FXML
     TextField yearOfOpeningTextField;
@@ -39,6 +44,7 @@ public class AddVenueController {
 
         addCityButton.setDisable(true);
         addVenueButton.setDisable(true);
+        addRegionButton.setDisable(true);
 
         cityNameTextField.textProperty().addListener((observableValue, s, t1) ->
                 addCityButton.setDisable((cityNameTextField.getText().isEmpty()) && regionComboBox.getValue() != null));
@@ -85,6 +91,8 @@ public class AddVenueController {
             }
         });
 
+        regionNameTextField.textProperty().addListener(observable -> addRegionButton.setDisable(regionNameTextField.getText().isEmpty()));
+
     }
 
     @FXML
@@ -126,6 +134,18 @@ public class AddVenueController {
         capacityTextField.clear();
 
 
+    }
+
+    @FXML
+    public void handleAddRegionButton() {
+        dataSource.addRegion(regionNameTextField.getText(), countryComboBox.getValue());
+        int indexCountry = countryComboBox.getSelectionModel().getSelectedIndex();
+        int indexCity = cityComboBox.getSelectionModel().getSelectedIndex();
+
+        countryComboBox.setItems(dataSource.getCountryList());
+        countryComboBox.getSelectionModel().select(indexCountry);
+
+        cityComboBox.getSelectionModel().select(indexCity);
     }
 
 }

@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 //TODO fix distance between radio buttons
+//TODO prevent user from typing more than 4 digits in "year" fields
 public class AddHillController {
 
     private DataSource dataSource;

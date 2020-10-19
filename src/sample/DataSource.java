@@ -315,4 +315,13 @@ public class DataSource {
 
         return citiesByCountry;
     }
+
+    public void addRegion(String regionName, Country country) {
+        Session session = factory.getCurrentSession();
+        session.beginTransaction();
+        Region region = new Region(regionName, country);
+        session.save(region);
+        session.getTransaction().commit();
+        session.close();
+    }
 }
