@@ -14,7 +14,7 @@
 
 <GridPane fx:id="mainGridPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
           prefHeight="1078.0" prefWidth="1883.0" xmlns="http://javafx.com/javafx/11.0.1"
-          xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="630.4000244140625" minWidth="10.0" prefWidth="100.0"/>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="1245.6000122070313" minWidth="10.0"

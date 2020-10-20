@@ -77,6 +77,8 @@
                     <Font size="10.0"/>
                 </font>
             </Button>
+            <Button fx:id="deleteVenueButton" mnemonicParsing="false" onAction="#handleDeleteVenueButton" text="Delete"
+                    GridPane.columnIndex="2" GridPane.rowIndex="8" GridPane.valignment="TOP"/>
         </GridPane>
     </content>
 

@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 //TODO make sorting alphabetically include foreign signs (like polish signs)
-//TODO make live search possible in combo box
+//TODO make live search possible in combo boxes
 //TODO add options to delete records
 public class Main extends Application {
 

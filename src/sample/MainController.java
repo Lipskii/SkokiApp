@@ -9,7 +9,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
-public class Controller {
+public class MainController {
 
     @FXML
     private Button addHillButton;

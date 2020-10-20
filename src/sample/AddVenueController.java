@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 
 import static java.lang.Integer.parseInt;
 
@@ -19,6 +20,8 @@ public class AddVenueController {
     Button addRegionButton;
     @FXML
     Button addVenueButton;
+    @FXML
+    Button deleteVenueButton;
     @FXML
     ComboBox<Country> countryComboBox;
     @FXML
@@ -93,6 +96,7 @@ public class AddVenueController {
 
         regionNameTextField.textProperty().addListener(observable -> addRegionButton.setDisable(regionNameTextField.getText().isEmpty()));
 
+
     }
 
     @FXML
@@ -139,6 +143,7 @@ public class AddVenueController {
     @FXML
     public void handleAddRegionButton() {
         dataSource.addRegion(regionNameTextField.getText(), countryComboBox.getValue());
+        regionNameTextField.clear();
         int indexCountry = countryComboBox.getSelectionModel().getSelectedIndex();
         int indexCity = cityComboBox.getSelectionModel().getSelectedIndex();
 
@@ -146,6 +151,21 @@ public class AddVenueController {
         countryComboBox.getSelectionModel().select(indexCountry);
 
         cityComboBox.getSelectionModel().select(indexCity);
+    }
+
+    @FXML
+    public void handleDeleteVenueButton() {
+        if (venuesListView.getSelectionModel().getSelectedItem() != null) {
+            dataSource.deleteRecord(venuesListView.getSelectionModel().getSelectedItem());
+            int indexCountry = countryComboBox.getSelectionModel().getSelectedIndex();
+            int indexCity = cityComboBox.getSelectionModel().getSelectedIndex();
+
+            countryComboBox.setItems(dataSource.getCountryList());
+            countryComboBox.getSelectionModel().select(indexCountry);
+
+            cityComboBox.getSelectionModel().select(indexCity);
+            venuesListView.setItems(dataSource.getVenueByCity(cityComboBox.getValue()));
+        }
     }
 
 }

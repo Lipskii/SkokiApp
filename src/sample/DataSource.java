@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import java.math.BigDecimal;
+import java.sql.Connection;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -321,6 +322,14 @@ public class DataSource {
         session.beginTransaction();
         Region region = new Region(regionName, country);
         session.save(region);
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    public void deleteRecord(Object obj) {
+        Session session = factory.getCurrentSession();
+        session.beginTransaction();
+        session.delete(obj);
         session.getTransaction().commit();
         session.close();
     }
