@@ -81,14 +81,16 @@ public class AddPeopleController {
 
         countryComboBox.setItems(dataSource.getCountryList());
         countryComboBox.getSelectionModel().select(0);
+
         new ComboBoxAutoComplete<>(countryComboBox);
+
         countryComboBox.valueProperty().addListener((observableValue, country, t1) -> {
             cityComboBox.setItems(dataSource.getCityByCountry(t1));
             cityComboBox.getSelectionModel().select(0);
             regionComboBox.setItems(dataSource.getRegionsByCountry(t1));
             regionComboBox.getSelectionModel().select(0);
         });
-        new ComboBoxAutoComplete<>(cityComboBox);
+
 
         cityTextField.textProperty().addListener((observableValue, s, t1) ->
                 addCityButton.setDisable(cityTextField.getText().isEmpty()));

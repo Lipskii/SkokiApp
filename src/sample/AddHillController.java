@@ -55,6 +55,7 @@ public class AddHillController {
             cityComboBox.getSelectionModel().select(0);
         });
 
+
         cityComboBox.valueProperty().addListener((observableValue, city, t1) -> {
             venueComboBox.setItems(dataSource.getVenueByCity(t1));
             venueComboBox.getSelectionModel().select(0);

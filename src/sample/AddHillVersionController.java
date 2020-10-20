@@ -88,6 +88,7 @@ public class AddHillVersionController {
             hillListView.getSelectionModel().select(0);
         }));
 
+
         hillListView.getSelectionModel().selectedItemProperty().addListener((observableValue, hill, t1) -> {
             hillVersionListView.setItems(dataSource.getHillVersionByHill(hillListView.getSelectionModel().getSelectedItem()));
             selectionLabel.setText("You've selected: " + hillListView.getSelectionModel().getSelectedItem());
@@ -199,6 +200,7 @@ public class AddHillVersionController {
 
         countryComboBox.setItems(dataSource.getCountryWithHillsList());
         countryComboBox.getSelectionModel().select(countryIndex);
+
         hillListView.setItems(dataSource.getHillByCountry(countryComboBox.getValue()));
         hillListView.getSelectionModel().select(hillIndex);
         hillVersionListView.setItems(dataSource.getHillVersionByHill(hillListView.getSelectionModel().getSelectedItem()));

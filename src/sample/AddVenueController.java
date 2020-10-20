@@ -61,6 +61,8 @@ public class AddVenueController {
             regionComboBox.getSelectionModel().select(0);
         });
 
+        new ComboBoxAutoComplete<>(countryComboBox);
+
         venueNameTextField.textProperty().addListener(observable -> addVenueButton.setDisable(venueNameTextField.getText().isEmpty() || yearOfOpeningTextField.getText().isEmpty() || (cityComboBox.getValue() == null)));
 
         yearOfOpeningTextField.textProperty().addListener(observable -> addVenueButton.setDisable(venueNameTextField.getText().isEmpty() || yearOfOpeningTextField.getText().isEmpty() || (cityComboBox.getValue() == null)));
