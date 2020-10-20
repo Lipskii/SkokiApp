@@ -6,7 +6,6 @@ import javafx.scene.control.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-//TODO(add isActive? if ski jumper)
 public class AddPeopleController {
 
     DataSource dataSource;
@@ -15,6 +14,10 @@ public class AddPeopleController {
     Button addCityButton;
     @FXML
     Button addPersonButton;
+    @FXML
+    Button addRegionButton;
+    @FXML
+    Button deleteRecordButton;
     @FXML
     CheckBox isActiveCheckBox;
     @FXML
@@ -45,6 +48,8 @@ public class AddPeopleController {
     TextField firstNameTextField;
     @FXML
     TextField lastNameTextField;
+    @FXML
+    TextField regionNameTextField;
     @FXML
     TextField searchTextField;
 
@@ -138,6 +143,27 @@ public class AddPeopleController {
             cityAddedLabel.setText(city.toString() + " added!");
         }
 
+    }
+
+    @FXML
+    public void handleAddRegionButton() {
+        dataSource.addRegion(regionNameTextField.getText(), countryComboBox.getValue());
+        regionNameTextField.clear();
+        int indexCountry = countryComboBox.getSelectionModel().getSelectedIndex();
+        int indexCity = cityComboBox.getSelectionModel().getSelectedIndex();
+
+        countryComboBox.setItems(dataSource.getCountryList());
+        countryComboBox.getSelectionModel().select(indexCountry);
+
+        cityComboBox.getSelectionModel().select(indexCity);
+    }
+
+    @FXML
+    public void handleDeleteRecordButton() {
+        if (personListView.getSelectionModel().getSelectedItem() != null) {
+            dataSource.deleteRecord(personListView.getSelectionModel().getSelectedItem());
+            personListView.setItems(dataSource.getPeople());
+        }
     }
 
 }

@@ -6,7 +6,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
 
 import static java.lang.Integer.parseInt;
 
@@ -68,13 +67,10 @@ public class AddVenueController {
 
         cityComboBox.valueProperty().addListener(observable -> addVenueButton.setDisable(venueNameTextField.getText().isEmpty() || yearOfOpeningTextField.getText().isEmpty() || (cityComboBox.getValue() == null)));
 
-        //to prevent user from typing not digits; left it as a not-lambda on purpose
-        capacityTextField.textProperty().addListener(new ChangeListener<>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                if (!t1.matches("\\d*")) {
-                    capacityTextField.setText(t1.replaceAll("[^\\d]", ""));
-                }
+        //to prevent user from typing not digits
+        capacityTextField.textProperty().addListener((observableValue, s, t1) -> {
+            if (!t1.matches("\\d*")) {
+                capacityTextField.setText(t1.replaceAll("[^\\d]", ""));
             }
         });
 

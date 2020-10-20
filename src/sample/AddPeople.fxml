@@ -51,8 +51,8 @@
             <ComboBox fx:id="cityComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
             <RadioButton fx:id="skiJumperYesButton" mnemonicParsing="false" text="Yes" GridPane.columnIndex="1"
                          GridPane.rowIndex="7"/>
-            <Button fx:id="addPersonButton" mnemonicParsing="false" onAction="#handleAddPersonButton"
-                    text="Add person" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7"/>
+            <Button fx:id="addPersonButton" mnemonicParsing="false" onAction="#handleAddPersonButton" text="Add person"
+                    GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7"/>
             <RadioButton fx:id="skiJumperNoButton" mnemonicParsing="false" text="No" GridPane.columnIndex="1"
                          GridPane.halignment="CENTER" GridPane.rowIndex="7"/>
             <DatePicker fx:id="birthdayDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
@@ -70,8 +70,14 @@
             <Label fx:id="cityAddedLabel" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="7"
                    GridPane.valignment="TOP"/>
             <Label text="Is Active?" GridPane.rowIndex="8"/>
-            <CheckBox fx:id="isActiveCheckBox" mnemonicParsing="false" GridPane.columnIndex="1"
-                      GridPane.rowIndex="8"/>
+            <CheckBox fx:id="isActiveCheckBox" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
+            <Label text="Add Region:" GridPane.columnIndex="2" GridPane.rowIndex="7"/>
+            <TextField fx:id="regionNameTextField" maxWidth="150.0" prefWidth="150.0" promptText="Region name"
+                       GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="7"/>
+            <Button fx:id="addRegionButton" mnemonicParsing="false" onAction="#handleAddRegionButton" text="Add region"
+                    GridPane.columnIndex="3" GridPane.rowIndex="7"/>
+            <Button fx:id="deleteRecordButton" mnemonicParsing="false" onAction="#handleDeleteRecordButton"
+                    text="Delete record" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
         </GridPane>
     </content>
 
