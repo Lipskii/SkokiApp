@@ -7,7 +7,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import java.math.BigDecimal;
-import java.sql.Connection;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -196,7 +195,7 @@ public class DataSource {
         return FXCollections.observableArrayList(hillVersions);
     }
 
-    public ObservableList getSeriesList() {
+    public ObservableList<Series> getSeries() {
         Session session = factory.getCurrentSession();
         ObservableList<Series> series = FXCollections.observableArrayList();
         session.beginTransaction();
@@ -207,7 +206,7 @@ public class DataSource {
         return series;
     }
 
-    public ObservableList getSubSeriesList() {
+    public ObservableList<Subseries> getSubSeries() {
         Session session = factory.getCurrentSession();
         ObservableList<Subseries> subseries = FXCollections.observableArrayList();
         session.beginTransaction();
@@ -332,5 +331,27 @@ public class DataSource {
         session.delete(obj);
         session.getTransaction().commit();
         session.close();
+    }
+
+    public void addSeasons() {
+        Session session = factory.getCurrentSession();
+        session.beginTransaction();
+        for (int i = 1924; i < 2024; i++) {
+            Season season = new Season(i);
+            session.save(season);
+        }
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    public ObservableList<Season> getSeasons() {
+        Session session = factory.getCurrentSession();
+        ObservableList<Season> seasons = FXCollections.observableArrayList();
+        session.beginTransaction();
+        List<Season> seasonList = session.createQuery("FROM Season").getResultList();
+        session.getTransaction().commit();
+        seasons.addAll(seasonList);
+        session.close();
+        return seasons;
     }
 }

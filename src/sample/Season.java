@@ -62,9 +62,6 @@ public class Season {
 
     @Override
     public String toString() {
-        return "Season{" +
-                "idseason=" + idSeason +
-                ", season=" + season +
-                '}';
+        return season - 1 + "/" + season;
     }
 }

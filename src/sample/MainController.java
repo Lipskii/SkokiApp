@@ -64,7 +64,7 @@ public class MainController {
             e.printStackTrace();
             return;
         }
-        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
 
         dialog.showAndWait();
     }
@@ -84,7 +84,7 @@ public class MainController {
             e.printStackTrace();
             return;
         }
-        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
 
         dialog.showAndWait();
     }
@@ -104,8 +104,7 @@ public class MainController {
             e.printStackTrace();
             return;
         }
-        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
-        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
 
         dialog.showAndWait();
         cancelButton.setVisible(false);
@@ -126,7 +125,7 @@ public class MainController {
             return;
         }
 
-        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
 
         dialog.showAndWait();
         cancelButton.setVisible(false);
@@ -137,9 +136,9 @@ public class MainController {
     public void handleAddResultsButton() {
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.initOwner(mainGridPane.getScene().getWindow());
-        dialog.setTitle("Add People");
+        dialog.setTitle("Add Results");
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("AddPeople.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("AddResults.fxml"));
         try {
             dialog.getDialogPane().setContent(fxmlLoader.load());
         } catch (IOException e) {
@@ -148,7 +147,12 @@ public class MainController {
             return;
         }
 
+//        //way of passing parameters into controllers
+//        AddResultsController controller = fxmlLoader.getController();
+//        controller.initData();
+
         dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
 
         dialog.show();
     }

@@ -65,6 +65,8 @@ public class Tryout {
 
             dataSource.getCountryWithHillsList();
 
+            dataSource.addSeasons();
+
 
         }
     }

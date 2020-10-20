@@ -105,8 +105,8 @@ public class PosNameCountryNoteDialogPaneController {
         //TODO REPAIR comboBoxed updates
 
 
-        seriesComboBox.setItems(dataSource.getSeriesList());
-        subseriesComboBox.setItems(dataSource.getSubSeriesList());
+        seriesComboBox.setItems(dataSource.getSeries());
+        subseriesComboBox.setItems(dataSource.getSubSeries());
 
     }
 
