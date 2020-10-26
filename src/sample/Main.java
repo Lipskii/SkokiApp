@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 //TODO make sorting alphabetically include foreign signs (like polish signs)
 //TODO add options to delete records
+//TODO fix DatePicker bug
 public class Main extends Application {
 
     @Override

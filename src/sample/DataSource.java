@@ -214,6 +214,7 @@ public class DataSource {
         session.getTransaction().commit();
         subseries.addAll(subSeriesList);
         session.close();
+        subseries.sort(Subseries::compareTo);
         return subseries;
     }
 

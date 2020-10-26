@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "subseries")
-public class Subseries {
+public class Subseries implements Comparable<Subseries> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,5 +54,10 @@ public class Subseries {
     @Override
     public String toString() {
         return subseries;
+    }
+
+    @Override
+    public int compareTo(Subseries subseries) {
+        return this.subseries.compareTo(subseries.subseries);
     }
 }
